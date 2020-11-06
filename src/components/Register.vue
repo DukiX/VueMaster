@@ -82,7 +82,7 @@ export default {
          sendRegister(e){
              e.preventDefault();
              this.loading = true;
-            axios.post(Vue.prototype.$apiUri+Vue.prototype.$register,{
+            axios.post(Vue.prototype.$register,{
                 email:this.email,
                 username:this.username,
                 password:this.password,

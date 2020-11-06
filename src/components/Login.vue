@@ -80,7 +80,7 @@ export default {
          sendLogin(e){
             e.preventDefault();
             this.loading = true;
-            axios.post(Vue.prototype.$apiUri+Vue.prototype.$login,{
+            axios.post(Vue.prototype.$login,{
                 username:this.username,
                 password:this.password
             }).then((response)=>{

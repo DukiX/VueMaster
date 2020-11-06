@@ -80,7 +80,7 @@ export default {
             e.preventDefault();
             this.loading = true;
 
-            axios.put(Vue.prototype.$apiUri+Vue.prototype.$user, {
+            axios.put(Vue.prototype.$user, {
                 firstName:this.firstName,
                 lastName:this.lastName
             }).then(()=>{
@@ -100,7 +100,7 @@ export default {
             e.preventDefault();
             this.loading = true;
 
-            axios.delete(Vue.prototype.$apiUri+Vue.prototype.$user).then(()=>{
+            axios.delete(Vue.prototype.$user).then(()=>{
                 this.error=false;
                 this.loading = false;
                 this.$router.go('/login');
@@ -124,14 +124,14 @@ export default {
                     'Content-Type': 'multipart/form-data' 
                 }
             };
-            axios.put(this.$apiUri+this.$image, fd, config);
+            axios.put(Vue.prototype.$image, fd, config);
 
             this.onCreate();
         },
 
         async onCreate(){
 
-            let response = await axios.get(this.$apiUri+this.$user);
+            let response = await axios.get(Vue.prototype.$user);
 
             await this.saveUserData(response.data);
 
@@ -140,7 +140,7 @@ export default {
             this.firstName = response.data.firstName;
             this.lastName = response.data.lastName;
 
-            let imageResponse = await axios.get(this.$apiUri+this.$image);
+            let imageResponse = await axios.get(Vue.prototype.$image);
 
             this.image = 'data:image/jpeg;base64,'+imageResponse.data;
         }

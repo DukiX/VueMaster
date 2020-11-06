@@ -32,6 +32,8 @@ export default {
   },
   
   created(){
+    axios.defaults.baseURL = Vue.prototype.$apiUri;
+
     axios.interceptors.request.use(
       async config => {
         config.headers = { 
