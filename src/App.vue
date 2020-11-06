@@ -1,28 +1,74 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-main>
+      <div>
+        <Header class="header"/>
+      </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header';
+import axios from 'axios';
+import {mapActions} from 'vuex'
+import Vue from 'vue'
+import store from './store' 
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    Header,
+  },
+
+  data: () => ({
+    //
+  }), 
+  methods:{
+    ...mapActions({ 
+            signIn:'auth/signIn' 
+        }),
+  },
+  
+  created(){
+    axios.interceptors.request.use(
+      async config => {
+        config.headers = { 
+          'Authorization':`Bearer ${store.getters['auth/getToken']}`
+        }
+        return config;
+      },
+      error => {
+        Promise.reject(error)
+    });
+
+    axios.interceptors.response.use( (response) => {
+      // Return a successful response back to the calling service
+      return response;
+    }, (error) => {
+      let originalRequest = error.config;
+
+      // Return any error which is not due to authentication back to the calling service
+      if (error.response.status !== 401 ) {
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+      return axios.post(Vue.prototype.$apiUri+Vue.prototype.$refresh,
+            {
+              "token": store.getters['auth/getRefreshToken']
+            })
+            .then(res => {
+                if (res.status === 200) {
+                  this.signIn({token:res.data.accessToken,refreshToken:res.data.refreshToken});
+                  
+                  axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.accessToken;
+
+                  return axios(originalRequest);
+                }
+            })
+    });
+  }
+}; 
+</script>
