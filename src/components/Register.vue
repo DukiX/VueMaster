@@ -22,9 +22,9 @@
                         :type= "showPassword ? 'text': 'password'" label="Password" name ="password"
                         @click:append="showPassword=!showPassword"/>
 
-                        <v-text-field v-model="confirmPassword" :rules="[rules.required, rules.passwordMatch]" :append-icon="showPassword ? 'mdi-eye': 'mdi-eye-off'" 
-                        :type= "showPassword ? 'text': 'password'" label="Confirm Password" name ="confirmPassword"
-                        @click:append="showPassword=!showPassword"/>
+                    <v-text-field v-model="confirmPassword" :rules="[rules.required, rules.passwordMatch]" :append-icon="showConfirmPassword ? 'mdi-eye': 'mdi-eye-off'" 
+                    :type= "showConfirmPassword ? 'text': 'password'" label="Confirm Password" name ="confirmPassword"
+                    @click:append="showConfirmPassword=!showConfirmPassword"/>
 
                     <hr/>
 
@@ -56,6 +56,7 @@ export default {
             error:false,
             loading:false,
             showPassword:false,
+            showConfirmPassword:false,
             validForm:false,
             validPassword:false,
             rules: {

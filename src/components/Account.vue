@@ -11,7 +11,8 @@
                             >
                             <img :src="image"/>
                         </v-avatar>
-                        <v-toolbar-title id="toolbarTitle"> {{firstName}} {{lastName}}
+                        <v-toolbar-title id="toolbarTitle"> 
+                            {{firstName}} {{lastName}}
                         </v-toolbar-title>
             </v-toolbar>
             <v-card-text>
@@ -73,7 +74,8 @@ export default {
 
     methods: {
         ...mapActions({
-            saveUserData:'auth/saveUserData'
+            saveUserData:'auth/saveUserData',
+            saveUserImage:'auth/saveUserImage'
         }),
 
         updateUser(e){
@@ -141,6 +143,8 @@ export default {
             this.lastName = response.data.lastName;
 
             let imageResponse = await axios.get(Vue.prototype.$image);
+
+            await this.saveUserImage(imageResponse.data);
 
             this.image = 'data:image/jpeg;base64,'+imageResponse.data;
         }

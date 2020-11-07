@@ -14,6 +14,9 @@ export default({
         },
         SET_REFRESH_TOKEN(state,refreshToken){
             state.refreshToken=refreshToken
+        },
+        SET_USER_IMAGE(state,image){
+            state.user.userImage=image
         }
     },
     actions: {
@@ -50,10 +53,19 @@ export default({
         attemptSaveRefreshToken({commit},refreshToken){
             commit('SET_REFRESH_TOKEN',refreshToken)
         },
+
+        async saveUserImage({dispatch},image){
+            dispatch('attemptSaveUserImage',image)
+        },
+
+        attemptSaveUserImage({commit},image){
+            commit('SET_USER_IMAGE',image)
+        }
     },
     getters : {
         isLoggedIn: state => !!state.token,
         getToken: state => state.token,
-        getRefreshToken: state => state.refreshToken
+        getRefreshToken: state => state.refreshToken,
+        getUser: state => state.user
     }
 })
