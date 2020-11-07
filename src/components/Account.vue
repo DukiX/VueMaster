@@ -93,7 +93,8 @@ export default {
                 this.loading = false;
             });
 
-            this.uploadImg();
+            if(typeof this.uploadImage !== "undefined")
+                this.uploadImg();
 
             this.onCreate();
         },
