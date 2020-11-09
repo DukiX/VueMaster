@@ -10,7 +10,6 @@
         <v-btn tile v-show="loggedIn" @click="$router.push('/account').catch(err => {$router.go()})">Account</v-btn>
       </v-row>
     </v-toolbar>
-    <router-view/>
   </div>
 </template>
 
