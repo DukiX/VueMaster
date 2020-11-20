@@ -10,7 +10,7 @@
             Please enter a correct username and password.
         </v-alert>
         <v-card id="card" elevation="12" min-width="300" max-width="300" > 
-            <v-toolbar color = "#1976d2"> 
+            <v-toolbar color = "primary"> 
                 <v-toolbar-title style="color:white"> Sign in 
                 </v-toolbar-title>
             </v-toolbar>
@@ -84,10 +84,10 @@ export default {
                 username:this.username,
                 password:this.password
             }).then((response)=>{
-                this.$router.go('/account');
                 this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});
                 this.error=false;
                 this.loading = false;
+                this.$router.push('/account');
             }).catch(()=>{
                 this.error=true;
                 this.loading = false;

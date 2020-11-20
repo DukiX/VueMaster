@@ -4,7 +4,25 @@
 </template>
 
 <script>
+import store from '../store/index'
 
+export default { 
+    name : "Home",
+    methods: {
+      
+    },
+    mounted(){
+      if(!this.loggedIn){
+        console.log("dasdad");
+        this.$router.push('/login');
+      }
+    },
+    computed: {
+      loggedIn: function () {
+        return store.getters['auth/isLoggedIn'];
+      }
+    }
+}
 </script>
 
 <style>

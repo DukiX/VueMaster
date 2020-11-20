@@ -1,6 +1,6 @@
 <template>
   <div >
-    <v-toolbar color="#1976d2" height="50px">
+    <v-toolbar color="primary" height="50px">
       <v-row justify = "end">
         <v-btn tile @click="$router.push('/').catch(err => {$router.go()})">Home</v-btn>
         <v-btn tile @click="$router.push('/about').catch(err => {$router.go()})">About</v-btn>

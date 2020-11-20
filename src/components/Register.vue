@@ -4,7 +4,7 @@
             Registration failed. Username is already taken.
         </v-alert>
         <v-card id="card" elevation="12" min-width="400" max-width="400" > 
-            <v-toolbar color = "#1976d2"> 
+            <v-toolbar color = "primary"> 
                 <v-toolbar-title style="color:white"> Register
                 </v-toolbar-title>
             </v-toolbar>
