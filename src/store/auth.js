@@ -29,7 +29,7 @@ export default({
             commit('SET_REFRESH_TOKEN',tokens.refreshToken);
         },
 
-        async saveUserData({dispatch},userData){
+        saveUserData({dispatch},userData){
             dispatch('attemptSaveUserData',userData)
         },
 
@@ -54,7 +54,7 @@ export default({
             commit('SET_REFRESH_TOKEN',refreshToken)
         },
 
-        async saveUserImage({dispatch},image){
+        saveUserImage({dispatch},image){
             dispatch('attemptSaveUserImage',image)
         },
 

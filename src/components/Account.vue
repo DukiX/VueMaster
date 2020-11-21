@@ -21,9 +21,13 @@
 
                     <v-text-field disabled v-model="username" label="Username" name="username"/>
 
-                    <v-text-field v-model="firstName" label="First Name" name="firstName"/>
+                    <v-text-field v-model="inputFirstName" label="First Name" name="firstName"/>
 
-                    <v-text-field v-model="lastName" label="LastName" name="lastName"/>
+                    <v-text-field v-model="inputLastName" label="Last Name" name="lastName"/>
+
+                    <v-text-field v-model="inputPhoneNumber" label="Phone Number" name="phoneNumber"/>
+
+                    <v-text-field v-model="inputAddress" label="Address" name="address"/>
 
                     <v-file-input
                         label="Choose an avatar"
@@ -61,14 +65,19 @@ export default {
             email: '',
             firstName: '',
             lastName: '',
+            phoneNumber:'',
+            address:'',
+            inputFirstName: '',
+            inputLastName: '',
+            inputPhoneNumber:'',
+            inputAddress:'',
             image:'',
             uploadImage:undefined,
             loading : false,
             error:false
         }
     },
-    async created() {
-        
+    created() {
         this.onCreate();
     },
 
@@ -83,11 +92,17 @@ export default {
             this.loading = true;
 
             axios.put(Vue.prototype.$user, {
-                firstName:this.firstName,
-                lastName:this.lastName
-            }).then(()=>{
+                firstName:this.inputFirstName,
+                lastName:this.inputLastName,
+                phoneNumber:this.inputPhoneNumber,
+                address:this.inputAddress
+            }).then((res)=>{
                 this.error=false;
                 this.loading = false;
+                this.firstName = res.data.firstName;
+                this.lastName = res.data.lastName;
+                this.phoneNumber=res.data.phoneNumber;
+                this.address = res.data.address;
             }).catch(()=>{
                 this.error=true;
                 this.loading = false;
@@ -95,8 +110,6 @@ export default {
 
             if(typeof this.uploadImage !== "undefined")
                 this.uploadImg();
-
-            this.onCreate();
         },
 
         deleteUser(e){
@@ -106,7 +119,7 @@ export default {
             axios.delete(Vue.prototype.$user).then(()=>{
                 this.error=false;
                 this.loading = false;
-                this.$router.go('/login');
+                this.$router.push('/login');
             }).catch(()=>{
                 this.error=true;
                 this.loading = false;
@@ -127,27 +140,38 @@ export default {
                     'Content-Type': 'multipart/form-data' 
                 }
             };
-            axios.put(Vue.prototype.$image, fd, config);
+            axios.put(Vue.prototype.$image, fd, config).then(()=>{
+                axios.get(Vue.prototype.$image).then((imageResponse)=>{
+                    this.saveUserImage(imageResponse.data);
 
-            this.onCreate();
+                    this.image = 'data:image/jpeg;base64,'+imageResponse.data;
+                });
+            });
         },
 
-        async onCreate(){
+        onCreate(){
 
-            let response = await axios.get(Vue.prototype.$user);
+            axios.get(Vue.prototype.$user).then((response)=>{
+                this.saveUserData(response.data);
 
-            await this.saveUserData(response.data);
+                this.username = response.data.username;
+                this.email = response.data.email;
+                this.firstName = response.data.firstName;
+                this.lastName = response.data.lastName;
+                this.phoneNumber = response.data.phoneNumber;
+                this.address = response.data.address;
 
-            this.username = response.data.username;
-            this.email = response.data.email;
-            this.firstName = response.data.firstName;
-            this.lastName = response.data.lastName;
+                this.inputFirstName = response.data.firstName;
+                this.inputLastName = response.data.lastName;
+                this.inputPhoneNumber = response.data.phoneNumber;
+                this.inputAddress = response.data.address;
 
-            let imageResponse = await axios.get(Vue.prototype.$image);
+                axios.get(Vue.prototype.$image).then((imageResponse)=>{
+                    this.saveUserImage(imageResponse.data);
 
-            await this.saveUserImage(imageResponse.data);
-
-            this.image = 'data:image/jpeg;base64,'+imageResponse.data;
+                    this.image = 'data:image/jpeg;base64,'+imageResponse.data;
+                });
+            });
         }
     }
 }
