@@ -1,6 +1,6 @@
 <template>
   <div id="register">
-    <Register />
+    <Register id="regCmp"/>
   </div>
 </template>
 
@@ -16,11 +16,13 @@ export default {
 </script>
 
 <style>
-/* 
 #register{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
+  text-align: center;
+}
+
+#regCmp{
+  display: inline-block;
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
 </style>

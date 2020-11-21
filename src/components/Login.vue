@@ -1,15 +1,12 @@
 <template>
     <div id="loginCmp">
-        <!-- <v-snackbar v-model="snackbar">
+        <v-snackbar v-model="error">
             <span>Please enter a correct username and password.</span>
             <v-btn color="red" text @click="error = false" >
                 Close
             </v-btn>
-        </v-snackbar> -->
-        <v-alert id="alert" min-width="300" max-width="300" type="error" v-if="error">
-            Please enter a correct username and password.
-        </v-alert>
-        <v-card id="card" elevation="12" min-width="300" max-width="300" > 
+        </v-snackbar>
+        <v-card id="card" elevation="12" min-width="330" max-width="330" > 
             <v-toolbar color = "primary"> 
                 <v-toolbar-title style="color:white"> Sign in 
                 </v-toolbar-title>
@@ -98,19 +95,4 @@ export default {
 </script>
 
 <style scoped>
-#loginCmp{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#alert{
-    position: absolute;
-    top:-100px;
-}
-
-#card{
-    position: relative;
-}
 </style>

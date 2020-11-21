@@ -1,8 +1,11 @@
 <template>
     <div id = "registerCmp">
-        <v-alert id="alert" type="error"  min-width="400" max-width="400" v-if="error">
-            Registration failed. Username is already taken.
-        </v-alert>
+        <v-snackbar v-model="error">
+            <span>Registration failed. Username is already taken.</span>
+            <v-btn color="red" text @click="error = false" >
+                Close
+            </v-btn>
+        </v-snackbar>
         <v-card id="card" elevation="12" min-width="400" max-width="400" > 
             <v-toolbar color = "primary"> 
                 <v-toolbar-title style="color:white"> Register
@@ -105,19 +108,4 @@ export default {
 </script>
 
 <style scoped>
-#registerCmp{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#alert{
-    position: absolute;
-    top:-100px;
-}
-
-#card{
-    position: relative;
-}
 </style>

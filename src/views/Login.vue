@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <Login />
+    <Login id="lgnCmp"/>
   </div>
 </template>
 
@@ -16,11 +16,13 @@ export default {
 </script>
 
 <style>
+#login{
+  text-align: center;
+}
 
-/* #login{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
+#lgnCmp{
+  display: inline-block;
+  padding-top: 70px;
+  padding-bottom: 40px;
+}
 </style>

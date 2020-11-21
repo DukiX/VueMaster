@@ -1,6 +1,6 @@
 <template>
   <div id="user">
-    <Account />
+    <Account id="acc"/>
   </div>
 </template>
 
@@ -17,9 +17,12 @@ export default {
 
 <style>
 #user{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#acc{
+  display: inline-block;
+  padding-top: 70px;
+  padding-bottom: 40px;
 }
 </style>
