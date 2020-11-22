@@ -1,7 +1,9 @@
 <template>
-  <div id="login">
-    <Login id="lgnCmp"/>
-  </div>
+    <v-container fill-height style="height: 100vh; max-height: 100%;">
+        <v-row justify="center" align="center">
+                <Login id = "logn"/>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -16,13 +18,8 @@ export default {
 </script>
 
 <style>
-#login{
-  text-align: center;
-}
-
-#lgnCmp{
-  display: inline-block;
+#logn{
   padding-top: 70px;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
 }
 </style>

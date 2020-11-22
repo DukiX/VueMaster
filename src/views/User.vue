@@ -1,7 +1,9 @@
 <template>
-  <div id="user">
-    <Account id="acc"/>
-  </div>
+    <v-container fill-height style="height: 100vh; max-height: 100%;">
+        <v-row justify="center" align="center">
+                <Account id="acc"/>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -16,13 +18,8 @@ export default {
 </script>
 
 <style>
-#user{
-  text-align: center;
-}
-
 #acc{
-  display: inline-block;
   padding-top: 70px;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div >
-    <v-toolbar color="primary" height="50px">
+    <v-app-bar absolute color="primary" >
       <v-row justify = "end">
         <v-btn tile @click="$router.push('/').catch(err => {$router.go()})">Home</v-btn>
         <v-btn tile @click="$router.push('/about').catch(err => {$router.go()})">About</v-btn>
@@ -9,7 +9,7 @@
         <v-btn tile v-show="loggedIn" v-on:click="signOut">Logout</v-btn>
         <v-btn tile v-show="loggedIn" @click="$router.push('/account').catch(err => {$router.go()})">Account</v-btn>
       </v-row>
-    </v-toolbar>
+    </v-app-bar>
   </div>
 </template>
 

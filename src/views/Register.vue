@@ -1,7 +1,9 @@
 <template>
-  <div id="register">
-    <Register id="regCmp"/>
-  </div>
+    <v-container fill-height style="height: 100vh; max-height: 100%;">
+        <v-row justify="center" align="center">
+                <Register id="regCmp"/>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -16,12 +18,7 @@ export default {
 </script>
 
 <style>
-#register{
-  text-align: center;
-}
-
 #regCmp{
-  display: inline-block;
   padding-top: 70px;
   padding-bottom: 50px;
 }
