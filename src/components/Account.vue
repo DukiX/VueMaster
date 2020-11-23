@@ -17,20 +17,20 @@
             </v-toolbar>
             <v-card-text>
                 <form method="post" @submit="updateUser">
-                    <v-text-field disabled v-model="email" type="email" label="Email address" name="email"/>
+                    <v-text-field disabled v-model="email" type="email" label="Email adresa" name="email"/>
 
-                    <v-text-field disabled v-model="username" label="Username" name="username"/>
+                    <v-text-field disabled v-model="username" label="Korisničko ime" name="username"/>
 
-                    <v-text-field v-model="inputFirstName" label="First Name" name="firstName"/>
+                    <v-text-field v-model="inputFirstName" label="Ime" name="firstName"/>
 
-                    <v-text-field v-model="inputLastName" label="Last Name" name="lastName"/>
+                    <v-text-field v-model="inputLastName" label="Prezime" name="lastName"/>
 
-                    <v-text-field v-model="inputPhoneNumber" label="Phone Number" name="phoneNumber"/>
+                    <v-text-field v-model="inputPhoneNumber" label="Broj telefona" name="phoneNumber"/>
 
-                    <v-text-field v-model="inputAddress" label="Address" name="address"/>
+                    <v-text-field v-model="inputAddress" label="Adresa" name="address"/>
 
                     <v-file-input
-                        label="Choose an avatar"
+                        label="Izaberi profilnu sliku"
                         accept="image/png, image/jpeg, image/bmp"
                         prepend-icon="mdi-camera"
                         @change="selectImg"
@@ -39,10 +39,10 @@
                     <hr/>
                     <v-row justify='end'>
                          <v-col class="text-left">
-                             <v-btn :loading="loading" elevation="5" v-on:click="deleteUser" color="white" type="button">Delete account</v-btn>
+                             <v-btn :loading="loading" elevation="5" v-on:click="deleteUser" color="white" type="button">Izbriši nalog</v-btn>
                         </v-col>
                         <v-col class="text-right">
-                            <v-btn :loading="loading" elevation="5" color="primary" type="submit">Save changes</v-btn>
+                            <v-btn :loading="loading" elevation="5" color="primary" type="submit">Sačuvaj</v-btn>
                         </v-col>
                     </v-row>
                 </form>

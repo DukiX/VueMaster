@@ -1,38 +1,42 @@
 <template>
     <div id = "registerCmp">
         <v-snackbar v-model="error">
-            <span>Registration failed. Username is already taken.</span>
+            <span>Registracija neuspela.</span>
             <v-btn color="red" text @click="error = false" >
-                Close
+                Zatvori
             </v-btn>
         </v-snackbar>
         <v-card id="card" elevation="12" min-width="400" max-width="400" > 
             <v-toolbar color = "primary"> 
-                <v-toolbar-title style="color:white"> Register
+                <v-toolbar-title style="color:white"> Registruj se
                 </v-toolbar-title>
             </v-toolbar>
             <v-card-text>
                 <form method="post" @submit="sendRegister">
-                    <v-text-field v-model="email" :rules="[rules.required]"  type="email" label="Email address" name="email"/>
+                    <v-text-field v-model="email" :rules="[rules.required]"  type="email" label="Email adresa" name="email"/>
 
-                    <v-text-field v-model="username" :rules="[rules.required]"  label="Username" name="username"/>
+                    <v-text-field v-model="username" :rules="[rules.required]"  label="Korisničko ime" name="username"/>
 
-                    <v-text-field v-model="firstName" :rules="[rules.required]" label="First Name" name="firstName"/>
+                    <v-text-field v-model="firstName" :rules="[rules.required]" label="Ime" name="firstName"/>
 
-                    <v-text-field v-model="lastName" :rules="[rules.required]" label="LastName" name="lastName"/>
+                    <v-text-field v-model="lastName" :rules="[rules.required]" label="Prezime" name="lastName"/>
+
+                    <v-text-field v-model="phoneNumber" label="Broj telefona" name="phoneNumber"/>
+
+                    <v-text-field v-model="address" label="Adresa" name="address"/>
 
                     <v-text-field v-model="password" :rules="[rules.required]" :append-icon="showPassword ? 'mdi-eye': 'mdi-eye-off'" 
-                        :type= "showPassword ? 'text': 'password'" label="Password" name ="password"
+                        :type= "showPassword ? 'text': 'password'" label="Lozinka" name ="password"
                         @click:append="showPassword=!showPassword"/>
 
                     <v-text-field v-model="confirmPassword" :rules="[rules.required, rules.passwordMatch]" :append-icon="showConfirmPassword ? 'mdi-eye': 'mdi-eye-off'" 
-                    :type= "showConfirmPassword ? 'text': 'password'" label="Confirm Password" name ="confirmPassword"
+                    :type= "showConfirmPassword ? 'text': 'password'" label="Ponovi lozinku" name ="confirmPassword"
                     @click:append="showConfirmPassword=!showConfirmPassword"/>
 
                     <hr/>
 
                     <div class="text-center">
-                        <v-btn :loading="loading" color="primary" block type="submit">Register</v-btn>
+                        <v-btn :loading="loading" color="primary" block type="submit">Registruj se</v-btn>
                     </div>
                 </form>
             </v-card-text>
@@ -54,6 +58,8 @@ export default {
             password: '',
             firstName: '',
             lastName: '',
+            phoneNumber:'',
+            address:'',
             confirmPassword: '',
             token: '',
             error:false,
@@ -92,7 +98,9 @@ export default {
                 password:this.password,
                 firstName:this.firstName,
                 lastName:this.lastName,
-                confirmPassword:this.confirmPassword
+                confirmPassword:this.confirmPassword,
+                phoneNumber:this.phoneNumber,
+                address:this.address
             }).then((response)=>{
                 this.$router.go('/login');
                 this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});

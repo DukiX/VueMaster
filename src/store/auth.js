@@ -37,7 +37,7 @@ export default({
             commit('SET_USER_DATA',userData)
         },
 
-        async signOut({dispatch}){
+        signOut({dispatch}){
             dispatch('attemptSignOut')
         },
 
@@ -46,7 +46,7 @@ export default({
             commit('SET_REFRESH_TOKEN',null)
         },
 
-        async saveRefreshToken({dispatch},refreshToken){
+        saveRefreshToken({dispatch},refreshToken){
             dispatch('attemptSaveRefreshToken',refreshToken)
         },
 

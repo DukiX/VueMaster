@@ -1,27 +1,27 @@
 <template>
     <div id="loginCmp">
         <v-snackbar v-model="error">
-            <span>Please enter a correct username and password.</span>
+            <span>Molim ukucajte ispravno korisničko ime i lozinku</span>
             <v-btn color="red" text @click="error = false" >
-                Close
+                Zatvori
             </v-btn>
         </v-snackbar>
         <v-card id="card" elevation="12" min-width="330" max-width="330" > 
             <v-toolbar color = "primary"> 
-                <v-toolbar-title style="color:white"> Sign in 
+                <v-toolbar-title style="color:white"> Uloguj se
                 </v-toolbar-title>
             </v-toolbar>
 
             <v-card-text>
                 <form method="post" @submit="sendLogin">
-                    <v-text-field v-model="username" :rules="[rules.requiredUsername]" label="Username" name="username"/>
+                    <v-text-field v-model="username" :rules="[rules.requiredUsername]" label="Korisničko ime" name="username"/>
 
                     <v-text-field v-model="password" :rules="[rules.requiredPassword]" :append-icon="showPassword ? 'mdi-eye': 'mdi-eye-off'" 
-                    :type= "showPassword ? 'text': 'password'" label="Password" name ="password"
+                    :type= "showPassword ? 'text': 'password'" label="Lozinka" name ="password"
                     @click:append="showPassword=!showPassword"/>
                     <hr/>
                     <div class="text-center">
-                        <v-btn :loading="loading" color="primary" block type="submit">Login</v-btn>
+                        <v-btn :loading="loading" color="primary" block type="submit">Uloguj se</v-btn>
                     </div>
                 </form>
             </v-card-text>
