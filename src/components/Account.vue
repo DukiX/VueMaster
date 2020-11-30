@@ -1,6 +1,6 @@
 <template>
-    <v-div id = "user">
-        <v-card id="card" elevation="12" min-width="400" max-width="400"> 
+    <div>
+        <v-card elevation="12" min-width="400" max-width="400"> 
             <v-toolbar height="100" color = "primary">
                         <!-- <v-toolbar-title style="color:white"> Account
                         </v-toolbar-title> -->
@@ -48,7 +48,7 @@
                 </form>
             </v-card-text>
         </v-card>
-    </v-div>
+    </div>
     
 </template>
 

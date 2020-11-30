@@ -31,6 +31,11 @@
                   <v-list-item-title v-if="loggedIn" @click="$router.push('/account').catch(err => {$router.go()})">Moj Profil</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+              <v-list-item v-if="loggedIn">
+                <v-list-item-content>
+                  <v-list-item-title v-if="loggedIn" v-on:click="$router.push('/change-password').catch(err => {$router.go()})">Promeni lozinku</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
               <v-divider></v-divider>
               <v-list-item v-if="loggedIn">
                 <v-list-item-content>

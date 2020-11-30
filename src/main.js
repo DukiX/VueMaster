@@ -15,6 +15,7 @@ Vue.prototype.$refresh = "/account/refresh";
 Vue.prototype.$user = "/account";
 Vue.prototype.$image = "/account/image";
 Vue.prototype.$register = "/account/register";
+Vue.prototype.$changePassword = "/account/changePassword";
 
 export default () => {
 

@@ -6,6 +6,7 @@ import Login from '../views/Login.vue'
 import User from '../views/User.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import ChangePassword from '../components/ChangePassword.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/change-password',
+    name: 'ChangePassword',
+    component: ChangePassword,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/about',

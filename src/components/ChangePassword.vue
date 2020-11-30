@@ -1,0 +1,100 @@
+<template>
+    <div>
+        <v-snackbar v-model="error">
+            <span>Greška pre promeni lozinke. Pokušajte ponovo.</span>
+            <v-btn color="red" text @click="error = false" >
+                Zatvori
+            </v-btn>
+        </v-snackbar>
+        <v-card id="card" elevation="12" min-width="330" max-width="330" > 
+            <v-toolbar color = "primary"> 
+                <v-toolbar-title style="color:white"> Promeni Lozinku
+                </v-toolbar-title>
+            </v-toolbar>
+
+            <v-card-text>
+                <form method="post" @submit="changePassword">
+                    <v-text-field v-model="oldPassword" :rules="[rules.required]" :append-icon="showOldPassword ? 'mdi-eye': 'mdi-eye-off'" 
+                    :type= "showOldPassword ? 'text': 'password'" label="Stara lozinka" name ="oldPassword"
+                    @click:append="showOldPassword=!showOldPassword"/>
+                    
+                    <v-text-field v-model="newPassword" :rules="[rules.required]" :append-icon="showPassword ? 'mdi-eye': 'mdi-eye-off'" 
+                    :type= "showPassword ? 'text': 'password'" label="Nova lozinka" name ="newPassword"
+                    @click:append="showPassword=!showPassword"/>
+
+                     <v-text-field v-model="confirmPassword" :rules="[rules.required, rules.passwordMatch]" :append-icon="showConfirmPassword ? 'mdi-eye': 'mdi-eye-off'" 
+                    :type= "showConfirmPassword ? 'text': 'password'" label="Ponovi novu lozinku" name ="confirmPassword"
+                    @click:append="showConfirmPassword=!showConfirmPassword"/>
+
+                    <hr/>
+                    <div class="text-center">
+                        <v-btn :loading="loading" color="primary" block type="submit">Promeni lozinku</v-btn>
+                    </div>
+                </form>
+            </v-card-text>
+        </v-card>
+    </div>
+</template>
+
+<script>
+import {mapActions} from 'vuex'
+import axios from 'axios';
+import Vue from 'vue'
+
+export default { 
+    name : "ChangePassword",
+    data(){ 
+        return {
+            oldPassword: '',
+            newPassword:'',
+            confirmPassword:'',
+            error:false,
+            loading:false,
+            showOldPassword:false,
+            showPassword:false,
+            showConfirmPassword:false,
+            snackbar:true,
+            rules: {
+                required: value => {
+                    if(!value)
+                        return "Required";
+                    return true;
+                },
+                passwordMatch: () => {
+                    if(this.password===this.confirmPassword){
+                        this.validPassword = true;
+                        return true;
+                    }
+                    this.validPassword = false;
+                    return `The Confirm password does not match the password.`;
+                }
+            }
+        } 
+    },
+    methods: {
+        ...mapActions({ 
+            signIn:'auth/signIn' 
+        }),
+         changePassword(e){
+            e.preventDefault();
+            this.loading = true;
+            axios.post(Vue.prototype.$changePassword,{
+                oldPassword:this.oldPassword,
+                newPassword:this.newPassword,
+                confirmPassword:this.confirmPassword
+            }).then((response)=>{
+                this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});
+                this.error=false;
+                this.loading = false;
+                this.$router.push('/account');
+            }).catch(()=>{
+                this.error=true;
+                this.loading = false;
+            });
+        }
+    }
+}
+</script>
+
+<style scoped>
+</style>
