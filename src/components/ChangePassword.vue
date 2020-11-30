@@ -6,6 +6,9 @@
                 Zatvori
             </v-btn>
         </v-snackbar>
+        <v-snackbar v-model="success">
+            <span>Uspešno ste promenili lozinku!</span>
+        </v-snackbar>
         <v-card id="card" elevation="12" min-width="330" max-width="330" > 
             <v-toolbar color = "primary"> 
                 <v-toolbar-title style="color:white"> Promeni Lozinku
@@ -26,7 +29,6 @@
                     :type= "showConfirmPassword ? 'text': 'password'" label="Ponovi novu lozinku" name ="confirmPassword"
                     @click:append="showConfirmPassword=!showConfirmPassword"/>
 
-                    <hr/>
                     <div class="text-center">
                         <v-btn :loading="loading" color="primary" block type="submit">Promeni lozinku</v-btn>
                     </div>
@@ -53,7 +55,7 @@ export default {
             showOldPassword:false,
             showPassword:false,
             showConfirmPassword:false,
-            snackbar:true,
+            success:false,
             rules: {
                 required: value => {
                     if(!value)
@@ -61,7 +63,7 @@ export default {
                     return true;
                 },
                 passwordMatch: () => {
-                    if(this.password===this.confirmPassword){
+                    if(this.newPassword===this.confirmPassword){
                         this.validPassword = true;
                         return true;
                     }
@@ -86,7 +88,8 @@ export default {
                 this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});
                 this.error=false;
                 this.loading = false;
-                this.$router.push('/account');
+                this.success = true;
+                setTimeout(() => { this.$router.push('/account'); }, 2000);
             }).catch(()=>{
                 this.error=true;
                 this.loading = false;

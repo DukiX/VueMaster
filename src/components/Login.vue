@@ -72,7 +72,8 @@ export default {
     },
     methods: {
         ...mapActions({ 
-            signIn:'auth/signIn' 
+            signIn:'auth/signIn',
+            saveUserImage:'auth/saveUserImage'
         }),
          sendLogin(e){
             e.preventDefault();
@@ -84,6 +85,11 @@ export default {
                 this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});
                 this.error=false;
                 this.loading = false;
+
+                axios.get(Vue.prototype.$image).then((imageResponse)=>{
+                    this.saveUserImage(imageResponse.data);
+                });
+
                 this.$router.push('/account');
             }).catch(()=>{
                 this.error=true;

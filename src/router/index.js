@@ -6,7 +6,7 @@ import Login from '../views/Login.vue'
 import User from '../views/User.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import ChangePassword from '../components/ChangePassword.vue'
+import ChangePassword from '../views/ChangePassword.vue'
 
 Vue.use(VueRouter)
 
