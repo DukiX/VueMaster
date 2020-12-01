@@ -71,7 +71,40 @@
                     <hr/>
                     <v-row justify='end'>
                          <v-col class="text-left">
-                             <v-btn :loading="loading" elevation="5" v-on:click="deleteUser" color="white" type="button">Izbriši nalog</v-btn>
+                            <v-dialog v-model="dialog" width="500">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn v-bind="attrs" v-on="on" :loading="loading" elevation="5" color="white" type="button">Izbriši nalog</v-btn>
+                                </template>
+                                <v-card>
+                                    <v-card-title>
+                                        Brisanje naloga
+                                    </v-card-title>
+                                    <v-divider></v-divider>
+
+                                    <v-card-text>
+                                        <br>
+                                        Da li ste sigurni da želite da obrišete nalog?
+                                    </v-card-text>
+                                    
+                                    <v-card-actions>
+                                        <v-btn
+                                        color="white"
+                                        elevation="5"
+                                        @click="dialog=false"
+                                    >
+                                        Odustani
+                                    </v-btn>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                        color="primary"
+                                        elevation="5"
+                                        @click="deleteUser"
+                                    >
+                                        Izbriši
+                                    </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
                         </v-col>
                         <v-col class="text-right">
                             <v-btn :loading="loading" elevation="5" color="primary" type="submit">Sačuvaj</v-btn>
@@ -107,7 +140,7 @@ export default {
             uploadImage:undefined,
             loading : false,
             error:false,
-
+            dialog:false,
             defaultImage: require("@/assets/defaultAccountIcon.png")
         }
     },
@@ -126,8 +159,13 @@ export default {
     methods: {
         ...mapActions({
             saveUserData:'auth/saveUserData',
-            saveUserImage:'auth/saveUserImage'
+            saveUserImage:'auth/saveUserImage',
+            signOutAuth:'auth/signOut'
         }),
+        signOut(){
+            this.signOutAuth();
+            this.$router.push('/');
+        },
         updateUser(e){
             e.preventDefault();
             this.loading = true;
@@ -160,7 +198,8 @@ export default {
             axios.delete(Vue.prototype.$user).then(()=>{
                 this.error=false;
                 this.loading = false;
-                this.$router.push('/login');
+                this.dialog=false;
+                this.signOut();
             }).catch(()=>{
                 this.error=true;
                 this.loading = false;
