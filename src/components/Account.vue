@@ -1,19 +1,51 @@
 <template>
     <div>
+        <v-snackbar v-model="error">
+            <span>Greška pri čuvanju profila. Pokušajte ponovo.</span>
+            <v-btn color="red" text @click="error = false" >
+                Zatvori
+            </v-btn>
+        </v-snackbar>
         <v-card elevation="12" min-width="400" max-width="400"> 
             <v-toolbar height="100" color = "primary">
-                        <!-- <v-toolbar-title style="color:white"> Account
-                        </v-toolbar-title> -->
-                        <v-avatar
-                            tile
-                            color="grey"
-                            size="80" 
-                            >
-                            <img :src="image"/>
-                        </v-avatar>
-                        <v-toolbar-title id="toolbarTitle"> 
-                            {{firstName}} {{lastName}}
-                        </v-toolbar-title>
+                <div id = "userImage">
+                    <v-menu offset-y min-width="300">
+                        <template v-slot:activator="{ on, attrs }">
+                        <v-btn icon v-bind="attrs" v-on="on">
+                            <v-avatar color="primary" size="80" >
+                                <img :src="realOrDefaultImage" />
+                            </v-avatar>
+                        </v-btn>
+                        </template>
+                        <v-card tile>
+                            <v-list >
+                                <v-list-item-group color="primary">
+                                <v-list-item>
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            <v-file-input
+                                                label="Izaberi novu profilnu sliku"
+                                                accept="image/png, image/jpeg, image/bmp"
+                                                prepend-icon="mdi-camera"
+                                                @change="selectImg"
+                                            ></v-file-input> 
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-divider></v-divider>
+                                <v-list-item>
+                                    <v-list-item-content>
+                                    <v-list-item-title v-on:click="deleteImg">Izbriši profilnu sliku</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                </v-list-item-group>
+                            </v-list>
+                            </v-card>
+                    </v-menu>
+                </div>
+                <v-toolbar-title id="toolbarTitle"> 
+                    {{firstName}} {{lastName}}
+                </v-toolbar-title>
             </v-toolbar>
             <v-card-text>
                 <form method="post" @submit="updateUser">
@@ -29,12 +61,12 @@
 
                     <v-text-field v-model="inputAddress" label="Adresa" name="address"/>
 
-                    <v-file-input
+                    <!-- <v-file-input
                         label="Izaberi profilnu sliku"
                         accept="image/png, image/jpeg, image/bmp"
                         prepend-icon="mdi-camera"
                         @change="selectImg"
-                    ></v-file-input>
+                    ></v-file-input> -->
 
                     <hr/>
                     <v-row justify='end'>
@@ -74,19 +106,28 @@ export default {
             image:'',
             uploadImage:undefined,
             loading : false,
-            error:false
+            error:false,
+
+            defaultImage: require("@/assets/defaultAccountIcon.png")
         }
     },
     created() {
         this.onCreate();
     },
-
+    computed:{
+        realOrDefaultImage() {
+            if(typeof(this.image) !== 'undefined' && this.image != null){
+                return this.image;
+            }else{
+                return this.defaultImage;
+            }
+        }
+    },
     methods: {
         ...mapActions({
             saveUserData:'auth/saveUserData',
             saveUserImage:'auth/saveUserImage'
         }),
-
         updateUser(e){
             e.preventDefault();
             this.loading = true;
@@ -145,7 +186,27 @@ export default {
                     this.saveUserImage(imageResponse.data);
 
                     this.image = 'data:image/jpeg;base64,'+imageResponse.data;
+                }).catch(()=>{
+                    this.image=null;
                 });
+            }).catch(()=>{
+                this.error=true;
+                this.loading = false;
+            });
+        },
+
+        deleteImg(e){
+            e.preventDefault();
+            this.loading = true;
+
+            axios.delete(Vue.prototype.$image).then(()=>{
+                this.error=false;
+                this.loading = false;
+                this.image = null;
+                this.uploadImage=null;
+            }).catch(()=>{
+                this.error=true;
+                this.loading = false;
             });
         },
 
@@ -170,6 +231,8 @@ export default {
                     this.saveUserImage(imageResponse.data);
 
                     this.image = 'data:image/jpeg;base64,'+imageResponse.data;
+                }).catch(()=>{
+                    this.image=null;
                 });
             });
         }
@@ -184,5 +247,8 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     color:white
+}
+#userImage{
+    padding-left: 10px;
 }
 </style>
