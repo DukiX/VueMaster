@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-snackbar v-model="error">
-            <span>Greška pre promeni lozinke. Pokušajte ponovo.</span>
+            <span>{{errorMessage}}</span>
             <v-btn color="red" text @click="error = false" >
                 Zatvori
             </v-btn>
@@ -63,6 +63,7 @@ export default {
             showPassword:false,
             showConfirmPassword:false,
             success:false,
+            errorMessage:'',
             rules: {
                 required: value => {
                     if(!value)
@@ -97,9 +98,10 @@ export default {
                 this.loading = false;
                 this.success = true;
                 setTimeout(() => { this.$router.push('/account'); }, 2000);
-            }).catch(()=>{
+            }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
+                this.errorMessage = error.response.data.Message;
             });
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <div id = "registerCmp">
         <v-snackbar v-model="error">
-            <span>Registracija neuspela.</span>
+            <span>{{errorMessage}}</span>
             <v-btn color="red" text @click="error = false" >
                 Zatvori
             </v-btn>
@@ -73,6 +73,7 @@ export default {
             loading:false,
             showPassword:false,
             showConfirmPassword:false,
+            errorMessage:'',
             validForm:false,
             validPassword:false,
             rules: {
@@ -113,9 +114,10 @@ export default {
                 this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});
                 this.error=false;
                 this.loading = false;
-            }).catch(()=>{
+            }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
+                this.errorMessage = error.response.data.Message;
             });
         }
     }

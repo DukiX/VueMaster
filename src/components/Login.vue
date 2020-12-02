@@ -1,7 +1,7 @@
 <template>
     <div id="loginCmp">
         <v-snackbar v-model="error">
-            <span>Molim ukucajte ispravno korisničko ime i lozinku</span>
+            <span>{{errorMessage}}</span>
             <v-btn color="red" text @click="error = false" >
                 Zatvori
             </v-btn>
@@ -14,7 +14,7 @@
                     indeterminate
                 ></v-progress-linear>
             </template>
-            
+
             <v-toolbar color = "primary"> 
                 <v-toolbar-title style="color:white"> Uloguj se
                 </v-toolbar-title>
@@ -56,6 +56,7 @@ export default {
             validForm:()=>false && !!this.validPassword,
             validUsername:false,
             validPassword:false,
+            errorMessage:'',
             rules: {
                 requiredUsername: value => {
                     if(!value){
@@ -99,9 +100,10 @@ export default {
                 });
 
                 this.$router.push('/account');
-            }).catch(()=>{
+            }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
+                this.errorMessage = error.response.data.Message;
             });
         }
     }

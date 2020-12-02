@@ -81,8 +81,6 @@ export default {
       realOrDefaultImage() {
         var image = store.getters['auth/getUserAvatar'];
 
-        console.log(image);
-
         if(typeof(image) !== 'undefined' && image != null){
             return image;
         }else{

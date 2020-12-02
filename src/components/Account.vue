@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-snackbar v-model="error">
-            <span>Greška pri čuvanju profila. Pokušajte ponovo.</span>
+            <span>{{errorMessage}}</span>
             <v-btn color="red" text @click="error = false" >
                 Zatvori
             </v-btn>
@@ -144,6 +144,7 @@ export default {
             inputPhoneNumber:'',
             inputAddress:'',
             image:'',
+            errorMessage:'',
             uploadImage:undefined,
             loading : true,
             error:false,
@@ -189,9 +190,10 @@ export default {
                 this.lastName = res.data.lastName;
                 this.phoneNumber=res.data.phoneNumber;
                 this.address = res.data.address;
-            }).catch(()=>{
+            }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
+                this.errorMessage = error.response.data.Message;
             });
 
             if(typeof this.uploadImage !== "undefined")
@@ -207,9 +209,10 @@ export default {
                 this.loading = false;
                 this.dialog=false;
                 this.signOut();
-            }).catch(()=>{
+            }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
+                this.errorMessage = error.response.data.Message;
             });
         },
 
@@ -235,9 +238,10 @@ export default {
                 }).catch(()=>{
                     this.image=null;
                 });
-            }).catch(()=>{
+            }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
+                this.errorMessage = error.response.data.Message;
             });
         },
 
@@ -250,9 +254,10 @@ export default {
                 this.loading = false;
                 this.image = null;
                 this.uploadImage=null;
-            }).catch(()=>{
+            }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
+                this.errorMessage = error.response.data.Message;
             });
         },
 
@@ -281,6 +286,10 @@ export default {
                     this.image=null;
                 });
                 this.loading = false;
+            }).catch((error)=>{
+                this.error=true;
+                this.loading = false;
+                this.errorMessage = error.response.data.Message;
             });
         }
     }
