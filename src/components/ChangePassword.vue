@@ -9,7 +9,14 @@
         <v-snackbar v-model="success">
             <span>Uspešno ste promenili lozinku!</span>
         </v-snackbar>
-        <v-card id="card" elevation="12" min-width="330" max-width="330" > 
+        <v-card id="card" elevation="12" min-width="330" max-width="330" :loading="loading"> 
+            <template slot="progress">
+                <v-progress-linear
+                    color="primary"
+                    height="8"
+                    indeterminate
+                ></v-progress-linear>
+            </template>
             <v-toolbar color = "primary"> 
                 <v-toolbar-title style="color:white"> Promeni Lozinku
                 </v-toolbar-title>
@@ -30,7 +37,7 @@
                     @click:append="showConfirmPassword=!showConfirmPassword"/>
 
                     <div class="text-center">
-                        <v-btn :loading="loading" color="primary" block type="submit">Promeni lozinku</v-btn>
+                        <v-btn :disabled="loading" color="primary" block type="submit">Promeni lozinku</v-btn>
                     </div>
                 </form>
             </v-card-text>

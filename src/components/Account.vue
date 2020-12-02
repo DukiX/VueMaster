@@ -6,7 +6,14 @@
                 Zatvori
             </v-btn>
         </v-snackbar>
-        <v-card elevation="12" min-width="400" max-width="400"> 
+        <v-card elevation="12" min-width="400" max-width="400" :loading="loading"> 
+            <template slot="progress">
+                <v-progress-linear
+                    color="primary"
+                    height="8"
+                    indeterminate
+                ></v-progress-linear>
+            </template>
             <v-toolbar height="100" color = "primary">
                 <div id = "userImage">
                     <v-menu offset-y min-width="300">
@@ -73,7 +80,7 @@
                          <v-col class="text-left">
                             <v-dialog v-model="dialog" width="500">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-btn v-bind="attrs" v-on="on" :loading="loading" elevation="5" color="white" type="button">Izbriši nalog</v-btn>
+                                    <v-btn v-bind="attrs" v-on="on" :disabled="loading" elevation="5" color="white" type="button">Izbriši nalog</v-btn>
                                 </template>
                                 <v-card>
                                     <v-card-title>
@@ -107,7 +114,7 @@
                             </v-dialog>
                         </v-col>
                         <v-col class="text-right">
-                            <v-btn :loading="loading" elevation="5" color="primary" type="submit">Sačuvaj</v-btn>
+                            <v-btn :disabled="loading" elevation="5" color="primary" type="submit">Sačuvaj</v-btn>
                         </v-col>
                     </v-row>
                 </form>
@@ -138,7 +145,7 @@ export default {
             inputAddress:'',
             image:'',
             uploadImage:undefined,
-            loading : false,
+            loading : true,
             error:false,
             dialog:false,
             defaultImage: require("@/assets/defaultAccountIcon.png")
@@ -237,7 +244,7 @@ export default {
         deleteImg(e){
             e.preventDefault();
             this.loading = true;
-
+            this.saveUserImage(null);
             axios.delete(Vue.prototype.$image).then(()=>{
                 this.error=false;
                 this.loading = false;
@@ -273,6 +280,7 @@ export default {
                 }).catch(()=>{
                     this.image=null;
                 });
+                this.loading = false;
             });
         }
     }

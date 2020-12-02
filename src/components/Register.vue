@@ -6,7 +6,14 @@
                 Zatvori
             </v-btn>
         </v-snackbar>
-        <v-card id="card" elevation="12" min-width="400" max-width="400" > 
+        <v-card id="card" elevation="12" min-width="400" max-width="400" :loading="loading"> 
+            <template slot="progress">
+                <v-progress-linear
+                    color="primary"
+                    height="8"
+                    indeterminate
+                ></v-progress-linear>
+            </template>
             <v-toolbar color = "primary"> 
                 <v-toolbar-title style="color:white"> Registruj se
                 </v-toolbar-title>
@@ -36,7 +43,7 @@
                     <hr/>
 
                     <div class="text-center">
-                        <v-btn :loading="loading" color="primary" block type="submit">Registruj se</v-btn>
+                        <v-btn :disabled="loading" color="primary" block type="submit">Registruj se</v-btn>
                     </div>
                 </form>
             </v-card-text>
