@@ -222,9 +222,9 @@ export default {
             };
             axios.put(Vue.prototype.$image, fd, config).then(()=>{
                 axios.get(Vue.prototype.$image).then((imageResponse)=>{
-                    this.saveUserImage(imageResponse.data);
-
                     this.image = 'data:image/jpeg;base64,'+imageResponse.data;
+
+                    this.saveUserImage(this.image);
                 }).catch(()=>{
                     this.image=null;
                 });
@@ -267,9 +267,9 @@ export default {
                 this.inputAddress = response.data.address;
 
                 axios.get(Vue.prototype.$image).then((imageResponse)=>{
-                    this.saveUserImage(imageResponse.data);
-
                     this.image = 'data:image/jpeg;base64,'+imageResponse.data;
+
+                    this.saveUserImage(this.image);
                 }).catch(()=>{
                     this.image=null;
                 });

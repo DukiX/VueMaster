@@ -3,7 +3,8 @@ export default({
     state: {
         token:null,
         user:null,
-        refreshToken:null
+        refreshToken:null,
+        userAvatar:null
     },
     mutations: {
         SET_TOKEN(state,token){
@@ -16,7 +17,7 @@ export default({
             state.refreshToken=refreshToken
         },
         SET_USER_IMAGE(state,image){
-            state.user.userImage=image
+            state.userAvatar=image
         }
     },
     actions: {
@@ -66,6 +67,7 @@ export default({
         isLoggedIn: state => !!state.token,
         getToken: state => state.token,
         getRefreshToken: state => state.refreshToken,
-        getUser: state => state.user
+        getUser: state => state.user,
+        getUserAvatar:state=>state.userAvatar
     }
 })

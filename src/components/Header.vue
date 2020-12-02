@@ -16,7 +16,9 @@
             v-bind="attrs"
             v-on="on"
           >
-            <v-icon x-large>mdi-account-circle</v-icon>
+            <v-avatar color="primary" size="50" >
+                                <img :src="realOrDefaultImage" />
+                            </v-avatar>
           </v-btn>
         </template>
         <v-card
@@ -60,6 +62,11 @@ import store from '../store/index'
 
 export default {
     name : "Header",
+    data(){
+        return {
+            defaultImage: require("@/assets/defaultAccountIcon.png")
+        }
+    },
     methods:{
         ...mapActions({
             signOutAuth:'auth/signOut'
@@ -71,9 +78,20 @@ export default {
         }
     },
     computed: {
-    loggedIn: function () {
-      return store.getters['auth/isLoggedIn'];
-    }
+      realOrDefaultImage() {
+        var image = store.getters['auth/getUserAvatar'];
+
+        console.log(image);
+
+        if(typeof(image) !== 'undefined' && image != null){
+            return image;
+        }else{
+            return this.defaultImage;
+        }
+      },
+      loggedIn: function () {
+        return store.getters['auth/isLoggedIn'];
+      }
   }
 }
 </script>
