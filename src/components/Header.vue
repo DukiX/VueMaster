@@ -17,8 +17,8 @@
             v-on="on"
           >
             <v-avatar color="primary" size="50" >
-                                <img :src="realOrDefaultImage" />
-                            </v-avatar>
+              <img :src="realOrDefaultImage" />
+            </v-avatar>
           </v-btn>
         </template>
         <v-card
