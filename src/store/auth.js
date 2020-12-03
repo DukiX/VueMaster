@@ -44,7 +44,8 @@ export default({
 
         attemptSignOut({commit}){
             commit('SET_TOKEN',null),
-            commit('SET_REFRESH_TOKEN',null)
+            commit('SET_REFRESH_TOKEN',null),
+            commit('SET_USER_IMAGE',null)
         },
 
         saveRefreshToken({dispatch},refreshToken){
