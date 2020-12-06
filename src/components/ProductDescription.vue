@@ -31,11 +31,11 @@
                         </v-col>
                     </v-row>
                     <v-row >
-                        <v-col cols="1">
-                            <v-text-field  hide-details single-line v-model="inBasket" type="number"/>
+                        <v-col cols="2">
+                            <v-text-field min="1" max="10" hide-details single-line v-model="inBasket" type="number"/>
                         </v-col>
                         <v-col>
-                            <v-btn style="margin-top:12px">Dodaj u korpu</v-btn>
+                            <v-btn color="primary" style="margin-top:12px">Dodaj u korpu</v-btn>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -63,8 +63,8 @@ export default {
     ],
     data(){
         return {
-            inBasket:0,
-            defaultImage: require("@/assets/defaultHoneyImage.jpg")
+            inBasket:1,
+            defaultImage: require("@/assets/defaultHoneyImage.jpg"),
         }
     },
     computed:{
