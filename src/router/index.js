@@ -8,6 +8,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import ChangePassword from '../views/ChangePassword.vue'
 import Product from '../views/Product.vue'
+import AddProductView from '../views/AddProductView.vue'
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,14 @@ const routes = [
     component: Product,
     meta: {
       requiresAuth: false
+    }
+  },
+  {
+    path: '/add-product',
+    name: 'AddProduct',
+    component: AddProductView,
+    meta: {
+      requiresAuth: true
     }
   }
 ]
