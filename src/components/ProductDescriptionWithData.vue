@@ -25,7 +25,7 @@ export default {
             error : false
         }
     },
-    created() {
+    mounted() {
         var id = this.$route.params.id;
         axios.get(Vue.prototype.$products+"/"+id).then((response)=>{
             this.name = response.data.naziv;
