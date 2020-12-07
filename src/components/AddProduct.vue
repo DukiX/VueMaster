@@ -14,8 +14,7 @@
                                <v-text-field v-model="name" label="Naziv proizvoda" :rules="[rules.required]"/>
                             </v-col>
                             <v-col>
-                               <v-text-field hide-details single-line v-model="price" type="number" label="Cena proizvoda"  :rules="[rules.required]" />
-                                RSD
+                               <v-text-field min="0" max = "100000" single-line v-model="price" type="number" label="Cena proizvoda (RSD)" :rules="[rules.required]" />
                             </v-col>
                         </v-row>
                         <v-row>
@@ -34,11 +33,11 @@
                         </v-row>
                         <v-row>
                             <v-col>
-                                <v-textarea v-model="description" label="Opis proizvoda" :rules="[rules.required]"/>
+                                <v-textarea outlined v-model="description" label="Opis proizvoda" :rules="[rules.required]"/>
                             </v-col>
                         </v-row>
                         <v-row>
-                             <v-btn :disabled="loading" color="white" elevation="5" style = "margin-left:20px; width:200px">Odustani</v-btn>
+                             <v-btn :disabled="loading" v-on:click="$router.push('/').catch(err => {$router.go()})" color="white" elevation="5" style = "margin-left:20px; width:200px">Odustani</v-btn>
                                     <v-spacer></v-spacer>
                             <v-btn :disabled="loading" v-on:click="prevProduct" color="primary" style = "margin-right:20px; width:200px">Prikaži</v-btn>
                         </v-row>
