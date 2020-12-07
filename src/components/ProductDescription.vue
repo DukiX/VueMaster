@@ -8,7 +8,7 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <v-img id="image" :aspect-ratio="16/9" min-width="550px" width="30vw" :src="realOrDefaultImage" />
+                    <v-img id="image" :aspect-ratio="16/9" min-width="550px" width="32vw" :src="realOrDefaultImage" />
                 </v-col>
                 <v-col >
                     <v-row>
@@ -27,15 +27,16 @@
                         <v-col>
                             <h3>Prodavac: </h3>
                             {{seller.firstName}} {{seller.lastName}} <br> 
-                            Kontakt telefon: {{seller.phoneNumber}}
+                            Kontakt telefon: {{seller.phoneNumber}} <br> 
+                            Email adresa: {{seller.email}}
                         </v-col>
                     </v-row>
                     <v-row >
                         <v-col cols="2">
-                            <v-text-field min="1" max="10" hide-details single-line v-model="inBasket" type="number"/>
+                            <v-text-field :disabled = "isPreview" min="1" max="10" hide-details single-line v-model="inBasket" type="number"/>
                         </v-col>
                         <v-col>
-                            <v-btn color="primary" style="margin-top:12px">Dodaj u korpu</v-btn>
+                            <v-btn :disabled = "isPreview" color="primary" style="margin-top:12px">Dodaj u korpu</v-btn>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -59,7 +60,8 @@ export default {
         'description',
         'wayOfUse',
         'seller',
-        'image'
+        'image',
+        'preview'
     ],
     data(){
         return {
@@ -74,6 +76,14 @@ export default {
             }else{
                 return this.defaultImage;
             }
+        },
+        isPreview(){
+            if(!this.preview){
+                return false;
+            }
+            else{
+                return true;
+            }
         }
     }
 }
@@ -83,8 +93,8 @@ export default {
 #cont{
     width: 80vw;
 }
-/* #image{
-    margin-left: 50px;
-    margin-right: 20px;
-} */
+#image{
+    margin-top: 15px;
+    margin-right: 30px;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ProductDescription :name = "name" :price = "price" :description = "description" :wayOfUse = "wayOfUse" :seller = "seller" :image = "image"/>
+        <ProductDescription :name = "name" :price = "price" :description = "description" :wayOfUse = "wayOfUse" :seller = "seller" :image = "image" :preview = "false"/>
     </div>
 </template>
 
