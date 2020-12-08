@@ -21,7 +21,7 @@
                             <v-col>
                                 <v-file-input
                                     label="Izaberi sliku proizvoda"
-                                    accept="image/png, image/jpeg, image/bmp"
+                                    accept="image/png, image/jpeg, image/bmp, image/jpg,"
                                     prepend-icon="mdi-camera"
                                     @change="selectImg"
                                     :rules="[rules.required]"
