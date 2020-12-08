@@ -66,12 +66,12 @@ export default {
     data(){
         return {
             inBasket:1,
-            defaultImage: require("@/assets/defaultHoneyImage.jpg"),
+            defaultImage: require("@/assets/defaultImage.jpg"),
         }
     },
     computed:{
         realOrDefaultImage() {
-            if(typeof(this.image) !== 'undefined' && this.image != null){
+            if(typeof(this.image) !== 'undefined' && this.image != null && this.image != ""){
                 return this.image;
             }else{
                 return this.defaultImage;

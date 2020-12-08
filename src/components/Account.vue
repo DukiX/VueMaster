@@ -157,7 +157,7 @@ export default {
     },
     computed:{
         realOrDefaultImage() {
-            if(typeof(this.image) !== 'undefined' && this.image != null){
+            if(typeof(this.image) !== 'undefined' && this.image != null  && this.image != ""){
                 return this.image;
             }else{
                 return this.defaultImage;

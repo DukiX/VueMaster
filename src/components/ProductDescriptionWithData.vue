@@ -33,7 +33,10 @@ export default {
             this.description = response.data.opis;
             this.wayOfUse = response.data.nacinKoriscenja;
             this.seller = response.data.prodavac;
-            this.image = 'data:image/jpeg;base64,'+response.data.slika;
+            if(response.data.slika!=null){
+                console.log("AAAAAAAAAAAAAAAAAAA");
+                this.image = 'data:image/jpeg;base64,'+response.data.slika;
+            }
         }).catch(()=>{
             this.error=true;
         });

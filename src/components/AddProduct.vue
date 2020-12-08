@@ -104,7 +104,7 @@ export default {
             var reader = new FileReader();
             reader.readAsDataURL(image);
             reader.onloadend = () =>{
-                if(typeof(reader.result) !== 'undefined' && reader.result != null){
+                if(typeof(reader.result) !== 'undefined' && reader.result != null  && this.image != ""){
                     this.stringImage = reader.result;
                 }
             }
@@ -133,7 +133,7 @@ export default {
                 this.error=false;
                 this.loading = false;
                 this.id = res.data.id;
-                if(typeof(this.image) !== 'undefined' && this.image != null){
+                if(typeof(this.image) !== 'undefined' && this.image != null  && this.image != ""){
                     let fd= new FormData();
 
                     fd.append('file', this.image);
@@ -149,14 +149,13 @@ export default {
                         }).catch(()=>{
                             this.stringImage=null;
                         });
+                        this.$router.push('/product/'+res.data.id);
                     }).catch((error)=>{
                         this.error=true;
                         this.loading = false;
                         this.errorMessage = error.response.data.Message;
                     });
                 }
-
-                this.$router.push('/product/'+res.data.id);
             }).catch((error)=>{
                 this.error=true;
                 this.loading = false;

@@ -7,7 +7,7 @@
             </v-btn>
         </v-snackbar>
         <v-card v-on:click="goToProduct" elevation="12" min-width="165px" max-width="165px"> 
-            <v-img id="image" :aspect-ratio="16/9" min-width="150px" max-width="150" :src="realOrDefaultImage" />
+            <v-img id="image" :aspect-ratio="16/9" min-width="165px" max-width="165px" :src="realOrDefaultImage" />
 
             <v-card-title>{{name}}</v-card-title>
 
@@ -33,12 +33,12 @@ export default {
         return {
             error : false,
             errorMessage:'',
-            defaultImage: require("@/assets/defaultHoneyImage.jpg"),
+            defaultImage: require("@/assets/defaultImage.jpg"),
         }
     },
     computed:{
         realOrDefaultImage() {
-            if(typeof(this.image) !== 'undefined' && this.image != null){
+            if(typeof(this.image) !== 'undefined' && this.image != null && this.image != ""){
                 return 'data:image/jpeg;base64,'+this.image;
             }else{
                 return this.defaultImage;
