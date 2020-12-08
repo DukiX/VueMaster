@@ -1,11 +1,12 @@
 <template>
   <div >
     <v-app-bar color="primary" fixed>
-      <v-btn @click="$router.push('/').catch(err => {$router.go()})" icon x-large>
-        <v-icon x-large>
-          mdi-home
-        </v-icon>
-      </v-btn>
+      <a style="margin-left:10px;" @click="$router.push('/').catch(err => {$router.go()})">
+        <div>
+          <v-img :src="logo" max-width="50px" style="float:left;"/>
+          <span style="margin-left:20px; margin-top:7px; color: white; display: inline-block; font-size: 25px; ">Medenjaci</span>
+        </div>
+      </a>
 
       <v-spacer></v-spacer>
 
@@ -69,7 +70,8 @@ export default {
     name : "Header",
     data(){
         return {
-            defaultImage: require("@/assets/defaultAccountIcon.png")
+            defaultImage: require("@/assets/defaultAccountIcon.png"),
+            logo: require("@/assets/honeyLogo.png")
         }
     },
     methods:{
