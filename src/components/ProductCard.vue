@@ -6,7 +6,7 @@
                 Zatvori
             </v-btn>
         </v-snackbar>
-        <v-card v-on:click="goToProduct" elevation="12" min-width="165px" max-width="165px"> 
+        <v-card v-on:click="goToProduct" :elevation="hover ? 12 : 4" min-width="165px" max-width="165px"> 
             <v-img id="image" :aspect-ratio="16/9" min-width="165px" max-width="165px" :src="realOrDefaultImage" />
 
             <v-card-title>{{name}}</v-card-title>
@@ -27,7 +27,8 @@ export default {
         'name',
         'price',
         'wayOfUse',
-        'image'
+        'image',
+        'hover'
     ],
     data(){
         return {

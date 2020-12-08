@@ -1,16 +1,18 @@
 <template>
-  <v-app>
-    <v-main>
       <div>
         <v-container style="height: 100vh; max-height: 100%;">
           <v-row justify="center" align="center">
-            <ProductGrid id="grid"/>
+            <v-col>
+            <v-row>
+              <h2 style="margin-left:10px; margin-top:80px; margin-bottom:-50px">Proizvodi</h2>
+            </v-row>
+            <v-row>
+              <ProductGrid id="grid"/>
+            </v-row>
+            </v-col>
           </v-row>
         </v-container>
-        <router-view/>
       </div>
-    </v-main>
-  </v-app>
 </template>
 
 <script>

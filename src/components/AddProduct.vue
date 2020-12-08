@@ -154,6 +154,7 @@ export default {
                         this.error=true;
                         this.loading = false;
                         this.errorMessage = error.response.data.Message;
+                        this.$router.push('/product/'+res.data.id);
                     });
                 }
             }).catch((error)=>{

@@ -3,7 +3,9 @@
         <v-container id="cont">
             <v-row>
                 <v-col v-for="product in productList" :key="product.id" lg="2" md="3" sm="4">
-                    <ProductCard :id="product.id" :name = "product.naziv" :price = "product.cena" :wayOfUse = "product.nacinKoriscenja" :image = "product.slika" />
+                    <v-hover v-slot="{ hover }">
+                        <ProductCard :id="product.id" :name = "product.naziv" :price = "product.cena" :wayOfUse = "product.nacinKoriscenja" :image = "product.slika" :hover="hover"/>
+                    </v-hover>
                 </v-col>
             </v-row>
         </v-container>
