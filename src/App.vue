@@ -51,7 +51,6 @@ export default {
       return response;
     }, (error) => {
       let originalRequest = error.config;
-
       // Return any error which is not due to authentication back to the calling service
       if (error.response.status !== 401 ) {
         return new Promise((resolve, reject) => {
@@ -64,8 +63,7 @@ export default {
             })
             .then(res => {
                 if (res.status === 200) {
-                  this.signIn({token:res.data.accessToken,refreshToken:res.data.refreshToken});
-                  
+                  this.signIn(res.data);
                   axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.accessToken;
 
                   return axios(originalRequest);

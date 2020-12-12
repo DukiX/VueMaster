@@ -27,7 +27,6 @@
                     <v-text-field v-model="password" :rules="[rules.requiredPassword]" :append-icon="showPassword ? 'mdi-eye': 'mdi-eye-off'" 
                     :type= "showPassword ? 'text': 'password'" label="Lozinka" name ="password"
                     @click:append="showPassword=!showPassword"/>
-                    <hr/>
                     <div class="text-center">
                         <v-btn :disabled="loading" color="primary" block type="submit">Uloguj se</v-btn>
                     </div>
