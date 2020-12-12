@@ -1,33 +1,29 @@
 export default({
     namespaced:true,
     state: {
-        token:null,
         user:null,
         refreshToken:null,
-        userAvatar:null
+        userAvatar:null,
+        loginData:null
     },
     mutations: {
-        SET_TOKEN(state,token){
-            state.token=token
+        SET_SIGNIN_DATA(state,loginData){
+            state.loginData=loginData
         },
         SET_USER_DATA(state,userData){
             state.user=userData
-        },
-        SET_REFRESH_TOKEN(state,refreshToken){
-            state.refreshToken=refreshToken
         },
         SET_USER_IMAGE(state,image){
             state.userAvatar=image
         }
     },
     actions: {
-        signIn({dispatch},tokens){
-            dispatch('attemptSignIn',tokens)
+        signIn({dispatch},loginData){
+            dispatch('attemptSignIn',loginData)
         },
 
-        attemptSignIn({commit},tokens){
-            commit('SET_TOKEN',tokens.token);
-            commit('SET_REFRESH_TOKEN',tokens.refreshToken);
+        attemptSignIn({commit},loginData){
+            commit('SET_SIGNIN_DATA',loginData);
         },
 
         saveUserData({dispatch},userData){
@@ -43,17 +39,8 @@ export default({
         },
 
         attemptSignOut({commit}){
-            commit('SET_TOKEN',null),
-            commit('SET_REFRESH_TOKEN',null),
+            commit('SET_SIGNIN_DATA',null),
             commit('SET_USER_IMAGE',null)
-        },
-
-        saveRefreshToken({dispatch},refreshToken){
-            dispatch('attemptSaveRefreshToken',refreshToken)
-        },
-
-        attemptSaveRefreshToken({commit},refreshToken){
-            commit('SET_REFRESH_TOKEN',refreshToken)
         },
 
         saveUserImage({dispatch},image){
@@ -65,9 +52,26 @@ export default({
         }
     },
     getters : {
-        isLoggedIn: state => !!state.token,
-        getToken: state => state.token,
-        getRefreshToken: state => state.refreshToken,
+        isLoggedIn: state => {
+            if(state.loginData==null)
+                return false;
+            else return !!state.loginData.accessToken;
+        },
+        getToken: state => {
+            if(state.loginData==null)
+                return null;
+            else return state.loginData.accessToken;
+        },
+        getRefreshToken: state => {
+            if(state.loginData==null)
+                return null;
+            else return state.loginData.refreshToken;
+        },
+        getUserRole: state => {
+            if(state.loginData==null)
+                return null;
+            else return state.loginData.userRole;
+        },
         getUser: state => state.user,
         getUserAvatar:state=>state.userAvatar
     }

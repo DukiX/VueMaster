@@ -111,7 +111,7 @@ export default {
                 address:this.address
             }).then((response)=>{
                 this.$router.go('/login');
-                this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});
+                this.signIn(response.data);
                 this.error=false;
                 this.loading = false;
             }).catch((error)=>{

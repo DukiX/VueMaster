@@ -93,7 +93,7 @@ export default {
                 newPassword:this.newPassword,
                 confirmPassword:this.confirmPassword
             }).then((response)=>{
-                this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});
+                this.signIn(response.data);
                 this.error=false;
                 this.loading = false;
                 this.success = true;

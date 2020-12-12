@@ -17,7 +17,7 @@ export default {
     data(){
         return {
             name : '',
-            price: '',
+            price: 0,
             description: '',
             wayOfUse : '',
             seller: null,
@@ -34,7 +34,6 @@ export default {
             this.wayOfUse = response.data.nacinKoriscenja;
             this.seller = response.data.prodavac;
             if(response.data.slika!=null){
-                console.log("AAAAAAAAAAAAAAAAAAA");
                 this.image = 'data:image/jpeg;base64,'+response.data.slika;
             }
         }).catch(()=>{

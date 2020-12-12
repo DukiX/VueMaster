@@ -91,7 +91,7 @@ export default {
                 username:this.username,
                 password:this.password
             }).then((response)=>{
-                this.signIn({token:response.data.accessToken,refreshToken:response.data.refreshToken});
+                this.signIn(response.data);
                 this.error=false;
                 this.loading = false;
 

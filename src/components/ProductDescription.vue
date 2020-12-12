@@ -54,15 +54,15 @@
 <script>
 export default {
     name : "ProductDescription",
-    props:[
-        'name',
-        'price',
-        'description',
-        'wayOfUse',
-        'seller',
-        'image',
-        'preview'
-    ],
+    props:{
+        name:String,
+        price:Number,
+        description : String,
+        wayOfUse : String,
+        seller:Object,
+        image:String,
+        preview:Boolean
+    },
     data(){
         return {
             inBasket:1,

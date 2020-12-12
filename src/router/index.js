@@ -9,6 +9,7 @@ import store from '../store/index'
 import ChangePassword from '../views/ChangePassword.vue'
 import Product from '../views/Product.vue'
 import AddProductView from '../views/AddProductView.vue'
+import AllUserProductsView from '../views/AllUserProductsView.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,15 @@ const routes = [
     path: '/',
     name: 'AllProducts',
     component: AllProducts
+  },
+  {
+    path: '/my-products',
+    name: 'MyProducts',
+    component: AllUserProductsView,
+    meta: {
+      requiresAuth: true,
+      forSellerOnly : true
+    }
   },
   {
     path: '/change-password',
@@ -66,7 +76,8 @@ const routes = [
     name: 'AddProduct',
     component: AddProductView,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      forSellerOnly : true
     }
   }
 ]
@@ -77,6 +88,16 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.forSellerOnly)) {
+    if (store.getters['auth/getUserRole']=="PRODAVAC") {
+      next()
+      return
+    }
+    next('/')
+  } else {
+    next()
+  }
+
   if(to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters['auth/isLoggedIn']) {
       next()

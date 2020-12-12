@@ -39,9 +39,14 @@
                   <v-list-item-title v-if="loggedIn" v-on:click="$router.push('/change-password').catch(err => {$router.go()})">Promeni lozinku</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item v-if="loggedIn">
+              <v-list-item v-if="loggedIn && isSeller">
                 <v-list-item-content>
-                  <v-list-item-title v-if="loggedIn" v-on:click="$router.push('/add-product').catch(err => {$router.go()})">Dodaj novi proizvod</v-list-item-title>
+                  <v-list-item-title v-if="loggedIn && isSeller" v-on:click="$router.push('/add-product').catch(err => {$router.go()})">Dodaj novi proizvod</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+               <v-list-item v-if="loggedIn && isSeller">
+                <v-list-item-content>
+                  <v-list-item-title v-if="loggedIn && isSeller" v-on:click="$router.push('/my-products').catch(err => {$router.go()})">Moji proizvodi</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>
@@ -96,6 +101,9 @@ export default {
       },
       loggedIn: function () {
         return store.getters['auth/isLoggedIn'];
+      },
+      isSeller() {
+        return store.getters['auth/getUserRole']=="PRODAVAC";
       }
   }
 }
