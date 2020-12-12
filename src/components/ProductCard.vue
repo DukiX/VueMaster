@@ -6,8 +6,8 @@
                 Zatvori
             </v-btn>
         </v-snackbar>
-        <v-card v-on:click="goToProduct" :elevation="hover ? 12 : 4" min-width="165px" max-width="165px"> 
-            <v-img id="image" :aspect-ratio="16/9" min-width="165px" max-width="165px" :src="realOrDefaultImage" />
+        <v-card v-on:click="goToProduct" :elevation="hover ? 12 : 4" min-width="250" max-width="250" > 
+            <v-img id="image" :aspect-ratio="12/9" min-width="250" max-width="250" :src="realOrDefaultImage" />
 
             <v-card-title>{{name}}</v-card-title>
 
@@ -18,7 +18,7 @@
             <v-card-actions v-if="forUser">
                 <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn small v-bind="attrs" v-on="on" :disabled="loading" elevation="5" color="white" type="button">Izbriši</v-btn>
+                        <v-btn v-bind="attrs" v-on="on" :disabled="loading" elevation="3" color="white" type="button">Izbriši</v-btn>
                     </template>
                     <v-card>
                         <v-card-title>
@@ -51,7 +51,7 @@
                     </v-card>
                 </v-dialog>
                 <v-spacer></v-spacer>
-                <v-btn  small color = "primary">Izmeni</v-btn>
+                <v-btn  color = "primary">Izmeni</v-btn>
             </v-card-actions>
         </v-card>
     </div>

@@ -2,7 +2,7 @@
     <div>
         <v-container id="cont">
             <v-row  v-if="!loading">
-                <v-col v-for="product in productList" :key="product.id" lg="2" md="3" sm="4">
+                <v-col v-for="product in productList" :key="product.id" lg="3" md="4" sm="6">
                     <v-hover v-slot="{ hover }">
                         <ProductCard :id="product.id" :name = "product.naziv" :price = "product.cena" :wayOfUse = "product.nacinKoriscenja" 
                         :image = "product.slika" :hover="hover" :forUser="forUser"/>
@@ -11,7 +11,7 @@
             </v-row>
             
             <v-row>
-                <v-col v-for="i in 12" :key="i" lg="2" md="3" sm="4">
+                <v-col v-for="i in 12" :key="i" lg="3" md="4" sm="6">
                     <v-skeleton-loader type="card" loading v-if="loading">
                     </v-skeleton-loader>
                 </v-col>
