@@ -25,6 +25,7 @@
                                     prepend-icon="mdi-camera"
                                     @change="selectImg"
                                     :rules="[rules.required]"
+                                    v-model="image"
                                 ></v-file-input> 
                             </v-col>
                              <v-col>
