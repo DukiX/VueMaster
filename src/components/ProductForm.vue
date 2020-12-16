@@ -53,7 +53,7 @@
                 <v-card-actions>
                     <v-btn v-on:click="back" color="white" elevation="5" style = "margin-left:20px; width:200px">Nazad</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn v-on:click="addProduct" :disabled="loading" type="submit" color="primary" style = "margin-right:20px; width:200px">Sačuvaj</v-btn>
+                    <v-btn v-on:click="addOrUpdate" :disabled="loading" type="submit" color="primary" style = "margin-right:20px; width:200px">Sačuvaj</v-btn>
                     <br><br>
                 </v-card-actions>
             </v-card>
@@ -82,7 +82,9 @@ export default {
         priceProp : Number,
         descriptionProp: String,
         wayOfUseProp:String,
-        stringImageProp:String
+        stringImageProp:String,
+        isUpdate:Boolean,
+        idProp:String
     },
     data(){
         return {
@@ -98,7 +100,7 @@ export default {
             loading:false,
             errorMessage:'Error',
             previewProduct:false,
-            id : '',
+            id : this.idProp,
             rules: {
                 required: value => {
                     if(!value){
@@ -133,6 +135,12 @@ export default {
             e.preventDefault();
             this.previewProduct=true;
         },
+        addOrUpdate(e){
+            if(this.isUpdate)
+                this.updateProduct(e);
+            else
+                this.addProduct(e);
+        },
         addProduct(e){
             e.preventDefault();
             const cfg = {
@@ -141,6 +149,52 @@ export default {
                 }
             };
             axios.post(Vue.prototype.$products, {
+                Naziv:this.name,
+                Cena:this.price,
+                Opis:this.description,
+                NacinKoriscenja:this.wayOfUse
+            },cfg).then((res)=>{
+                this.error=false;
+                this.loading = false;
+                this.id = res.data.id;
+                if(typeof(this.image) !== 'undefined' && this.image != null  && this.image != ""){
+                    let fd= new FormData();
+
+                    fd.append('file', this.image);
+
+                    const config = {
+                        headers: { 
+                            'Content-Type': 'multipart/form-data' 
+                        }
+                    };
+                    axios.put(Vue.prototype.$productsUploadImage+"/"+this.id, fd, config).then(()=>{
+                        axios.get(Vue.prototype.$products+"/"+this.id).then((imageResponse)=>{
+                            this.stringImage = 'data:image/jpeg;base64,'+imageResponse.data.slika;
+                        }).catch(()=>{
+                            this.stringImage=null;
+                        });
+                        this.$router.push('/product/'+res.data.id);
+                    }).catch((error)=>{
+                        this.error=true;
+                        this.loading = false;
+                        this.errorMessage = error.response.data.Message;
+                        this.$router.push('/product/'+res.data.id);
+                    });
+                }
+            }).catch((error)=>{
+                this.error=true;
+                this.loading = false;
+                this.errorMessage = error.response.data.Message;
+            });
+        },
+        updateProduct(e){
+            e.preventDefault();
+            const cfg = {
+                headers: { 
+                    'Content-Type': 'application/json' 
+                }
+            };
+            axios.put(Vue.prototype.$products+"/"+this.id, {
                 Naziv:this.name,
                 Cena:this.price,
                 Opis:this.description,
