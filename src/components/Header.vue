@@ -29,30 +29,30 @@
         >
           <v-list >
             <v-list-item-group color="primary">
-              <v-list-item v-if="loggedIn">
+              <v-list-item v-if="loggedIn" @click="$router.push('/account').catch(err => {$router.go()})">
                 <v-list-item-content>
-                  <v-list-item-title v-if="loggedIn" @click="$router.push('/account').catch(err => {$router.go()})">Moj Profil</v-list-item-title>
+                  <v-list-item-title v-if="loggedIn">Moj Profil</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item v-if="loggedIn">
+              <v-list-item v-if="loggedIn" v-on:click="$router.push('/change-password').catch(err => {$router.go()})">
                 <v-list-item-content>
-                  <v-list-item-title v-if="loggedIn" v-on:click="$router.push('/change-password').catch(err => {$router.go()})">Promeni lozinku</v-list-item-title>
+                  <v-list-item-title v-if="loggedIn">Promeni lozinku</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item v-if="loggedIn && isSeller">
+              <v-list-item v-if="loggedIn && isSeller" v-on:click="$router.push('/add-product').catch(err => {$router.go()})">
                 <v-list-item-content>
-                  <v-list-item-title v-if="loggedIn && isSeller" v-on:click="$router.push('/add-product').catch(err => {$router.go()})">Dodaj novi proizvod</v-list-item-title>
+                  <v-list-item-title v-if="loggedIn && isSeller">Dodaj novi proizvod</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-               <v-list-item v-if="loggedIn && isSeller">
+               <v-list-item v-if="loggedIn && isSeller" v-on:click="$router.push('/my-products').catch(err => {$router.go()})">
                 <v-list-item-content>
-                  <v-list-item-title v-if="loggedIn && isSeller" v-on:click="$router.push('/my-products').catch(err => {$router.go()})">Moji proizvodi</v-list-item-title>
+                  <v-list-item-title v-if="loggedIn && isSeller">Moji proizvodi</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>
-              <v-list-item v-if="loggedIn">
+              <v-list-item v-if="loggedIn" v-on:click="signOut">
                 <v-list-item-content>
-                  <v-list-item-title v-if="loggedIn" v-on:click="signOut">Izloguj se</v-list-item-title>
+                  <v-list-item-title v-if="loggedIn">Izloguj se</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>

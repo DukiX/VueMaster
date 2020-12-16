@@ -28,21 +28,17 @@
                             <v-list >
                                 <v-list-item-group color="primary">
                                 <v-list-item>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <v-file-input
-                                                label="Izaberi novu profilnu sliku"
-                                                accept="image/png, image/jpeg, image/bmp"
-                                                prepend-icon="mdi-camera"
-                                                @change="selectImg"
-                                            ></v-file-input> 
-                                        </v-list-item-title>
-                                    </v-list-item-content>
+                                    <v-file-input
+                                        label="Izaberi novu profilnu sliku"
+                                        accept="image/png, image/jpeg, image/bmp"
+                                        prepend-icon="mdi-camera"
+                                        @change="selectImg"
+                                    ></v-file-input> 
                                 </v-list-item>
                                 <v-divider></v-divider>
-                                <v-list-item>
+                                <v-list-item v-on:click="deleteImg">
                                     <v-list-item-content>
-                                    <v-list-item-title v-on:click="deleteImg">Izbriši profilnu sliku</v-list-item-title>
+                                    <v-list-item-title>Izbriši profilnu sliku</v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
                                 </v-list-item-group>
