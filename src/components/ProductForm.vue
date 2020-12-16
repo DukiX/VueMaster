@@ -1,10 +1,10 @@
 <template>
     <div >
-        <v-container id="cont" v-if="!previewProduct">
+        <v-container id="cont">
             <v-card>
                 <v-toolbar color = "primary">
                     <v-toolbar-title id="toolbarTitle" style="color:white"> 
-                        Dodavanje novog proizvoda
+                        {{naslov}}
                     </v-toolbar-title>
                 </v-toolbar>
                 <v-card-text>
@@ -38,7 +38,7 @@
                             </v-col>
                         </v-row>
                         <v-row>
-                             <v-btn :disabled="loading" v-on:click="$router.push('/').catch(err => {$router.go()})" color="white" elevation="5" style = "margin-left:20px; width:200px">Odustani</v-btn>
+                             <v-btn :disabled="loading" v-on:click="$router.go(-1).catch(err => {$router.go()})" color="white" elevation="5" style = "margin-left:20px; width:200px">Odustani</v-btn>
                                     <v-spacer></v-spacer>
                             <v-btn :disabled="loading" v-on:click="prevProduct" color="primary" style = "margin-right:20px; width:200px">Prikaži</v-btn>
                         </v-row>
@@ -46,13 +46,18 @@
                 </v-card-text>
             </v-card>
         </v-container>
-        <ProductDescription v-if="previewProduct" :name = "name" :price = "price" :description = "description" :wayOfUse = "wayOfUse"
-         :seller = "seller" :image = "stringImage" :preview = "true"/>
-         <v-row v-if="previewProduct">
-            <v-btn v-if="previewProduct" v-on:click="back" color="white" elevation="5" style = "margin-left:20px; width:200px">Nazad</v-btn>
-            <v-spacer></v-spacer>
-            <v-btn v-if="previewProduct"  v-on:click="addProduct" :disabled="loading" type="submit" color="primary" style = "margin-right:20px; width:200px">Sačuvaj</v-btn>
-         </v-row>
+        <v-dialog v-model="previewProduct" width="90%">
+            <v-card>
+                <ProductDescription :name = "name" :price = "price" :description = "description" :wayOfUse = "wayOfUse"
+                :seller = "seller" :image = "stringImage" :preview = "true"/>
+                <v-card-actions>
+                    <v-btn v-on:click="back" color="white" elevation="5" style = "margin-left:20px; width:200px">Nazad</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn v-on:click="addProduct" :disabled="loading" type="submit" color="primary" style = "margin-right:20px; width:200px">Sačuvaj</v-btn>
+                    <br><br>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 
@@ -63,22 +68,32 @@ import ProductDescription from '@/components/ProductDescription.vue';
 import store from '../store/index'
 
 export default {
-    name : "AddProduct",
+    name : "ProductForm",
     components: {
         ProductDescription
     },
     created() {
         this.seller = store.getters['auth/getUser'];
     },
+    props:{
+        naslovProp: String,
+        sellerProp: Object,
+        nameProp : String,
+        priceProp : Number,
+        descriptionProp: String,
+        wayOfUseProp:String,
+        stringImageProp:String
+    },
     data(){
         return {
-            seller: null,
-            name : '',
-            price : '',
-            description: '',
-            wayOfUse:'',
+            naslov: this.naslovProp,
+            seller: {...this.sellerProp},
+            name : this.nameProp,
+            price : this.priceProp,
+            description: this.descriptionProp,
+            wayOfUse:this.wayOfUseProp,
             image:undefined,
-            stringImage:'',
+            stringImage:this.stringImage,
             error:false,
             loading:false,
             errorMessage:'Error',

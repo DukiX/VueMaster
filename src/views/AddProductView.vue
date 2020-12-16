@@ -1,18 +1,18 @@
 <template>
     <v-container fill-height style="height: 100vh; max-height: 100%;">
         <v-row justify="center" align="center">
-                <AddProduct id="prod"/>
+                <ProductForm id="prod" naslovProp="Dodavanje novog proizvoda"/>
         </v-row>
     </v-container>
 </template>
 
 <script>
-import AddProduct from '../components/AddProduct.vue'
+import ProductForm from '../components/ProductForm.vue'
 
 export default {
   name: 'AddProductVue',
   components: {
-    AddProduct
+    ProductForm
   }
 }
 </script>
