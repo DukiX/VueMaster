@@ -76,13 +76,7 @@ export default {
         this.seller = store.getters['auth/getUser'];
     },
     props:{
-        naslovProp: String,
-        sellerProp: Object,
-        nameProp : String,
-        priceProp : Number,
-        descriptionProp: String,
-        wayOfUseProp:String,
-        stringImageProp:String,
+        naslov: String,
         isUpdate:Boolean
     },
     mounted() {
@@ -104,14 +98,13 @@ export default {
     },
     data(){
         return {
-            naslov: this.naslovProp,
-            seller: {...this.sellerProp},
-            name : this.nameProp,
-            price : this.priceProp,
-            description: this.descriptionProp,
-            wayOfUse:this.wayOfUseProp,
+            seller: null,
+            name : '',
+            price : 0,
+            description: '',
+            wayOfUse:'',
             image:undefined,
-            stringImage:this.stringImage,
+            stringImage:'',
             error:false,
             loading:false,
             errorMessage:'Error',

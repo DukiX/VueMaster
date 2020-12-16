@@ -1,7 +1,7 @@
 <template>
     <v-container fill-height style="height: 100vh; max-height: 100%;">
         <v-row justify="center" align="center">
-                <ProductForm id="prod" naslovProp="Dodavanje novog proizvoda"/>
+                <ProductForm id="prod" naslov="Dodavanje novog proizvoda"/>
         </v-row>
     </v-container>
 </template>

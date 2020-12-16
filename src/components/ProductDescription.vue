@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import store from '../store/index';
+
 export default {
     name : "ProductDescription",
     props:{
@@ -79,6 +81,10 @@ export default {
         },
         isPreview(){
             if(!this.preview){
+                var role = store.getters['auth/getUserRole'];
+                console.log(role);
+                if(role == 'PRODAVAC')
+                    return true;
                 return false;
             }
             else{

@@ -98,7 +98,7 @@ export default {
                     this.saveUserImage(imageResponse.data);
                 });
 
-                this.$router.push('/account');
+                this.$router.push('/');
             }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
