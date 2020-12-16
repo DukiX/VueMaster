@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import AllProducts from '../views/AllProducts.vue'
-import Login from '../views/Login.vue'
-import User from '../views/User.vue'
-import Register from '../views/Register.vue'
+import AllProductsView from '../views/AllProductsView.vue'
+import LoginView from '../views/LoginView.vue'
+import AccountView from '../views/AccountView.vue'
+import RegisterView from '../views/RegisterView.vue'
 import store from '../store/index'
-import ChangePassword from '../views/ChangePassword.vue'
-import Product from '../views/Product.vue'
+import ChangePasswordView from '../views/ChangePasswordView.vue'
+import ProductView from '../views/ProductView.vue'
 import AddProductView from '../views/AddProductView.vue'
 import AllUserProductsView from '../views/AllUserProductsView.vue'
 import UpdateProductView from '../views/UpdateProductView.vue'
@@ -16,8 +16,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'AllProducts',
-    component: AllProducts
+    name: 'AllProductsView',
+    component: AllProductsView
   },
   {
     path: '/my-products',
@@ -39,23 +39,23 @@ const routes = [
   },
   {
     path: '/change-password',
-    name: 'ChangePassword',
-    component: ChangePassword,
+    name: 'ChangePasswordView',
+    component: ChangePasswordView,
     meta: {
       requiresAuth: true
     }
   }, 
   {
     path: '/login',
-    name: 'Login',
-    component: Login,
+    name: 'LoginView',
+    component: LoginView,
     meta: {
       requiresLoggedOut: true
     }
   },{
     path: '/register',
-    name: 'Register',
-    component: Register,
+    name: 'RegisterView',
+    component: RegisterView,
     meta: {
       requiresLoggedOut: true
     }
@@ -63,15 +63,15 @@ const routes = [
   {
     path: '/account',
     name: 'Account',
-    component: User,
+    component: AccountView,
     meta: {
       requiresAuth: true
     }
   },
   {
     path: '/product/:id',
-    name: 'Product',
-    component: Product,
+    name: 'ProductView',
+    component: ProductView,
     meta: {
       requiresAuth: false
     }

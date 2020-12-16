@@ -10,7 +10,7 @@
 import ProductDescriptionWithData from '../components/ProductDescriptionWithData.vue'
 
 export default {
-  name: 'Product',
+  name: 'ProductView',
   components: {
     ProductDescriptionWithData
   }

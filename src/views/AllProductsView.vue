@@ -19,7 +19,7 @@
 import ProductGrid from '../components/ProductGrid.vue';
 
 export default {
-  name: 'App',
+  name: 'AllProductsView',
 
   components: {
     ProductGrid
