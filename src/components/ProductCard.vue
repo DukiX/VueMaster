@@ -6,19 +6,20 @@
                 Zatvori
             </v-btn>
         </v-snackbar>
-        <v-card v-on:click="goToProduct" :elevation="hover ? 12 : 4" min-width="250" max-width="250" > 
-            <v-img id="image" :aspect-ratio="12/9" min-width="250" max-width="250" :src="realOrDefaultImage" />
+        <v-card v-on:click="goToProduct" :elevation="hover ? 12 : 4" min-width="320" max-width="320" > 
+            <v-img id="image" :aspect-ratio="12/9" min-width="320" max-width="320" :src="realOrDefaultImage" />
 
-            <v-card-title>{{name}}</v-card-title>
-
+            <v-card-title style = "font-size: 22px;">{{name}}</v-card-title>
+            <br style=" display: block; content: ''; margin: -20px 0;"/>
             <v-card-subtitle>
-                Cena : <span style = "font-weight: bold;">{{price}}</span> RSD   <br>
-                <span> Način korišćenja : {{wayOfUse}}</span> 
+                <span style = "font-size: 18px;">Cena : </span>
+                <span style = "font-weight: bold; font-size: 18px;">{{price}}</span> RSD   <br>
+                <span style = "font-size: 18px;"> Način korišćenja : {{wayOfUse}}</span> 
             </v-card-subtitle>
             <v-card-actions v-if="forUser">
                 <v-dialog v-model="dialog" width="500">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn v-bind="attrs" v-on="on" :disabled="loading" elevation="3" color="white" type="button">Izbriši</v-btn>
+                        <v-btn large v-bind="attrs" v-on="on" :disabled="loading" elevation="3" color="white" type="button">Izbriši</v-btn>
                     </template>
                     <v-card>
                         <v-card-title>
@@ -51,7 +52,7 @@
                     </v-card>
                 </v-dialog>
                 <v-spacer></v-spacer>
-                <v-btn v-on:click="updateProduct" color = "primary">Izmeni</v-btn>
+                <v-btn large v-on:click="updateProduct" color = "primary">Izmeni</v-btn>
             </v-card-actions>
         </v-card>
     </div>

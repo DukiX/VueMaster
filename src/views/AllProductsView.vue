@@ -2,13 +2,15 @@
       <div>
         <v-container style="height: 100vh; max-height: 100%;">
           <v-row justify="center" align="center">
+            <!-- <v-col>
+            </v-col> -->
             <v-col>
-            <v-row>
-              <h2 id = "naslov">Proizvodi</h2>
-            </v-row>
-            <v-row>
-              <ProductGrid id="grid"/>
-            </v-row>
+              <v-row>
+                <h2 id = "naslov">Proizvodi</h2>
+              </v-row>
+              <v-row>
+                <ProductGrid id="grid"/>
+              </v-row>
             </v-col>
           </v-row>
         </v-container>

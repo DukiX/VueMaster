@@ -2,7 +2,7 @@
     <div>
         <v-container id="cont">
             <v-row  v-if="!loading">
-                <v-col v-for="product in productList" :key="product.id" lg="3" md="4" sm="6">
+                <v-col v-for="product in productList" :key="product.id">
                     <v-hover v-slot="{ hover }">
                         <ProductCard :id="product.id" :name = "product.naziv" :price = "product.cena" :wayOfUse = "product.nacinKoriscenja" 
                         :image = "product.slika" :hover="hover" :forUser="forUser"/>
