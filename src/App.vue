@@ -65,10 +65,9 @@ export default {
                 if (res.status === 200) {
                   this.signIn(res.data);
                   axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.accessToken;
-
                   return axios(originalRequest);
                 }
-            })
+            });
     });
   }
 }; 

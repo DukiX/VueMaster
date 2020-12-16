@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AllProducts from '../views/AllProducts.vue'
-import About from '../views/About.vue'
 import Login from '../views/Login.vue'
 import User from '../views/User.vue'
 import Register from '../views/Register.vue'
@@ -10,6 +9,7 @@ import ChangePassword from '../views/ChangePassword.vue'
 import Product from '../views/Product.vue'
 import AddProductView from '../views/AddProductView.vue'
 import AllUserProductsView from '../views/AllUserProductsView.vue'
+import UpdateProductView from '../views/UpdateProductView.vue'
 
 Vue.use(VueRouter)
 
@@ -29,18 +29,23 @@ const routes = [
     }
   },
   {
+    path: '/update-product/:id',
+    name: 'UpdateProduct',
+    component: UpdateProductView,
+    meta: {
+      requiresAuth: true,
+      forSellerOnly : true
+    }
+  },
+  {
     path: '/change-password',
     name: 'ChangePassword',
     component: ChangePassword,
     meta: {
       requiresAuth: true
     }
-  },
+  }, 
   {
-    path: '/about',
-    name: 'About',
-    component: About
-  },{
     path: '/login',
     name: 'Login',
     component: Login,

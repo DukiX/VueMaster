@@ -38,7 +38,7 @@
                             </v-col>
                         </v-row>
                         <v-row>
-                             <v-btn :disabled="loading" v-on:click="$router.go(-1).catch(err => {$router.go()})" color="white" elevation="5" style = "margin-left:20px; width:200px">Odustani</v-btn>
+                             <v-btn :disabled="loading" v-on:click="$router.go(-1).catch(err => {$router.go()})" color="white" elevation="5" style = "margin-left:20px; width:200px">Nazad</v-btn>
                                     <v-spacer></v-spacer>
                             <v-btn :disabled="loading" v-on:click="prevProduct" color="primary" style = "margin-right:20px; width:200px">Prikaži</v-btn>
                         </v-row>
@@ -83,8 +83,24 @@ export default {
         descriptionProp: String,
         wayOfUseProp:String,
         stringImageProp:String,
-        isUpdate:Boolean,
-        idProp:String
+        isUpdate:Boolean
+    },
+    mounted() {
+        if(this.isUpdate){        
+            this.id = this.$route.params.id;
+            axios.get(Vue.prototype.$products+"/"+this.id).then((response)=>{
+                this.name = response.data.naziv;
+                this.price = response.data.cena;
+                this.description = response.data.opis;
+                this.wayOfUse = response.data.nacinKoriscenja;
+                this.seller = response.data.prodavac;
+                if(response.data.slika!=null){
+                    this.stringImage = 'data:image/jpeg;base64,'+response.data.slika;
+                }
+            }).catch(()=>{
+                this.error=true;
+            });
+        }
     },
     data(){
         return {
@@ -100,7 +116,7 @@ export default {
             loading:false,
             errorMessage:'Error',
             previewProduct:false,
-            id : this.idProp,
+            id : '',
             rules: {
                 required: value => {
                     if(!value){
@@ -181,6 +197,9 @@ export default {
                         this.$router.push('/product/'+res.data.id);
                     });
                 }
+                else{
+                    this.$router.push('/product/'+res.data.id);
+                }
             }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
@@ -226,6 +245,8 @@ export default {
                         this.errorMessage = error.response.data.Message;
                         this.$router.push('/product/'+res.data.id);
                     });
+                }else{
+                    this.$router.push('/product/'+res.data.id);
                 }
             }).catch((error)=>{
                 this.error=true;

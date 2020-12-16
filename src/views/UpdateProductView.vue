@@ -1,24 +1,24 @@
 <template>
     <v-container fill-height style="height: 100vh; max-height: 100%;">
         <v-row justify="center" align="center">
-                <ChangePassword id="chg"/>
+            <ProductForm id="prod" naslovProp="Izmena proizvoda" isUpdate/>
         </v-row>
     </v-container>
 </template>
 
 <script>
-import ChangePassword from '../components/ChangePassword.vue'
+import ProductForm from '../components/ProductForm.vue'
 
 export default {
-  name: 'ChngPassword',
-  components: {
-    ChangePassword
-  }
+    name: 'AddProductVue',
+    components: {
+        ProductForm
+    }
 }
 </script>
 
 <style>
-#chg{
+#prod{
   padding-top: 70px;
   padding-bottom: 50px;
 }

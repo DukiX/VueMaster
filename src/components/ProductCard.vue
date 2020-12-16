@@ -51,7 +51,7 @@
                     </v-card>
                 </v-dialog>
                 <v-spacer></v-spacer>
-                <v-btn  color = "primary">Izmeni</v-btn>
+                <v-btn v-on:click="updateProduct" color = "primary">Izmeni</v-btn>
             </v-card-actions>
         </v-card>
     </div>
@@ -91,6 +91,10 @@ export default {
         }
     },
     methods:{
+        updateProduct(e){
+            e.preventDefault();
+            this.$router.push('/update-product/'+this.id).catch(() => {this.$router.go()});
+        },
         goToProduct(){
             this.$router.push('/product/'+this.id).catch(() => {this.$router.go()});
         },
