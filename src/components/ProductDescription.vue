@@ -1,5 +1,18 @@
 <template>
     <div >
+        <v-snackbar v-model="dodato">
+            <span>Uspešno dodato u korpu! </span>
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                color="white"
+                text
+                v-bind="attrs"
+                @click="dodato = false"
+                >
+                Zatvori
+                </v-btn>
+            </template>
+        </v-snackbar>
         <v-container id="cont">
             <v-row>
                 <v-col>
@@ -36,7 +49,7 @@
                             <v-text-field :disabled = "isPreview" min="1" max="10" hide-details single-line v-model="inBasket" type="number"/>
                         </v-col>
                         <v-col>
-                            <v-btn :disabled = "isPreview" color="primary" style="margin-top:12px">Dodaj u korpu</v-btn>
+                            <v-btn v-on:click="addToBasket" :disabled = "isPreview" color="primary" style="margin-top:12px">Dodaj u korpu</v-btn>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -53,6 +66,8 @@
 
 <script>
 import store from '../store/index';
+import {mapActions} from 'vuex'
+import {v4} from 'uuid';
 
 export default {
     name : "ProductDescription",
@@ -65,10 +80,25 @@ export default {
         image:String,
         preview:Boolean
     },
+    methods:{
+        ...mapActions({ 
+            addItemToBasket:'basket/addToBasket'
+        }),
+        addToBasket(e){
+            e.preventDefault();
+            this.addItemToBasket({
+                id : v4(),
+                itemId : this.$route.params.id,
+                quantity : this.inBasket
+            });
+            this.dodato = true;
+        }
+    },
     data(){
         return {
             inBasket:1,
             defaultImage: require("@/assets/defaultImage.jpg"),
+            dodato:false
         }
     },
     computed:{
