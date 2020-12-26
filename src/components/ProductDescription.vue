@@ -89,7 +89,9 @@ export default {
             this.addItemToBasket({
                 id : v4(),
                 itemId : this.$route.params.id,
-                quantity : this.inBasket
+                quantity : this.inBasket,
+                name : this.name,
+                price : this.price
             });
             this.dodato = true;
         }

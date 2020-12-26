@@ -8,7 +8,10 @@ export default({
             state.basket.push(item);
         },
         REMOVE_FROM_BASKET(state,id){
-            state.basket = state.basket.filter(item=>item.id == id);
+            console.log(state.basket);
+            console.log(id);
+            state.basket = state.basket.filter(item=>item.id != id);
+            console.log(state.basket);
         }
     },
     actions: {

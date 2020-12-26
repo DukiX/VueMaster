@@ -9,7 +9,7 @@
       </a>
 
       <v-spacer></v-spacer>
-
+      <v-icon style="padding-right:25px" v-on:click="$router.push('/basket').catch(err => {$router.go()})" x-large>shopping_cart</v-icon>
       <v-menu offset-y v-if="loggedIn">
         <template v-slot:activator="{ on, attrs }">
           <v-btn

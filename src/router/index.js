@@ -10,6 +10,7 @@ import ProductView from '../views/ProductView.vue'
 import AddProductView from '../views/AddProductView.vue'
 import AllUserProductsView from '../views/AllUserProductsView.vue'
 import UpdateProductView from '../views/UpdateProductView.vue'
+import BasketView from '../views/BasketView.vue'
 
 Vue.use(VueRouter)
 
@@ -83,6 +84,14 @@ const routes = [
     meta: {
       requiresAuth: true,
       forSellerOnly : true
+    }
+  },
+  {
+    path: '/basket',
+    name: 'Basket',
+    component: BasketView,
+    meta: {
+      requiresAuth: true
     }
   }
 ]
