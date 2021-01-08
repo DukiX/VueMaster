@@ -8,10 +8,10 @@ export default({
             state.basket.push(item);
         },
         REMOVE_FROM_BASKET(state,id){
-            console.log(state.basket);
-            console.log(id);
             state.basket = state.basket.filter(item=>item.id != id);
-            console.log(state.basket);
+        },
+        EMPTY_BASKET(state){
+            state.basket = [];
         }
     },
     actions: {
@@ -20,6 +20,9 @@ export default({
         },
         removeFromBasket({commit},id){
             commit('REMOVE_FROM_BASKET',id);
+        },
+        emptyBasket({commit}){
+            commit('EMPTY_BASKET');
         }
     },
     getters : {
