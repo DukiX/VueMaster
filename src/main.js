@@ -19,6 +19,9 @@ Vue.prototype.$register = "/account/register";
 Vue.prototype.$changePassword = "/account/change-password";
 Vue.prototype.$products = "/products";
 Vue.prototype.$productsUploadImage = "/products/upload-image";
+Vue.prototype.$orders = "/order";
+Vue.prototype.$ordersForSeller = "/order/for-seller";
+Vue.prototype.$ordersForBuyer = "/order/for-buyer";
 
 export default () => {
 

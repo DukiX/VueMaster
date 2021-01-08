@@ -49,6 +49,11 @@
                   <v-list-item-title v-if="loggedIn && isSeller">Moji proizvodi</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+              <v-list-item v-if="loggedIn" v-on:click="$router.push('/orders').catch(err => {$router.go()})">
+                <v-list-item-content>
+                  <v-list-item-title v-if="loggedIn">Moje narudzbine</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
               <v-divider></v-divider>
               <v-list-item v-if="loggedIn" v-on:click="signOut">
                 <v-list-item-content>
