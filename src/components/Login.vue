@@ -95,7 +95,9 @@ export default {
                 this.loading = false;
 
                 axios.get(Vue.prototype.$image).then((imageResponse)=>{
-                    this.saveUserImage(imageResponse.data);
+                    this.image = 'data:image/jpeg;base64,'+imageResponse.data;
+
+                    this.saveUserImage(this.image);
                 });
 
                 this.$router.push('/');
