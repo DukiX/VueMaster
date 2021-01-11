@@ -9,7 +9,7 @@
       </a>
 
       <v-spacer></v-spacer>
-      <v-icon v-if="loggedIn" style="padding-right:25px" v-on:click="$router.push('/basket').catch(err => {$router.go()})" x-large>shopping_cart</v-icon>
+      <v-icon v-if="loggedIn && !isSeller" style="padding-right:25px" v-on:click="$router.push('/basket').catch(err => {$router.go()})" x-large>shopping_cart</v-icon>
       <v-menu offset-y v-if="loggedIn">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -27,7 +27,7 @@
           min-width="300"
           tile
         >
-          <v-list >
+          <v-list>
             <v-list-item-group color="primary">
               <v-list-item v-if="loggedIn" @click="$router.push('/account').catch(err => {$router.go()})">
                 <v-list-item-content>

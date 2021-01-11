@@ -3,10 +3,12 @@
         <h2 class="display-2 mb-4">Moje narudzbine</h2>
 
         <v-data-table
+        style="cursor: pointer"
         :headers="headers"
         :items="orders"
         item-key="name"
         class="elevation-1"
+        @click:row="clickRow"
         >
         </v-data-table>
 
@@ -61,6 +63,9 @@ export default {
         getPrettyDate(d){
             var date = new Date(d);
             return date.getUTCDate()+'.'+date.getUTCMonth()+1+'.'+date.getUTCFullYear();
+        },
+        clickRow(item){
+            this.$router.push('/orders/'+item.id);
         }
     },
     beforeMount() {

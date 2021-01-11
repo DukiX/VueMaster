@@ -12,6 +12,7 @@ import AllUserProductsView from '../views/AllUserProductsView.vue'
 import UpdateProductView from '../views/UpdateProductView.vue'
 import BasketView from '../views/BasketView.vue'
 import OrdersView from '../views/OrdersView.vue'
+import OrderView from '../views/OrderView.vue'
 
 Vue.use(VueRouter)
 
@@ -99,6 +100,14 @@ const routes = [
     path: '/orders',
     name: 'Orders',
     component: OrdersView,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/orders/:id',
+    name: 'order',
+    component: OrderView,
     meta: {
       requiresAuth: true
     }
