@@ -1,7 +1,7 @@
 <template>
     <v-container style="height: 100vh; max-height: 100%;">
         <v-row justify="center" align="center">
-            <Order/>
+            <Order id="acc"/>
         </v-row>
     </v-container>
 </template>
