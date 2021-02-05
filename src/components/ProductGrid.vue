@@ -4,7 +4,7 @@
             <v-row  v-if="!loading">
                 <v-col v-for="product in productList" :key="product.id" lg="4">
                     <v-hover v-slot="{ hover }">
-                        <ProductCard :id="product.id" :name = "product.naziv" :price = "product.cena" :wayOfUse = "product.nacinKoriscenja" 
+                        <ProductCard :id="product.id" :name = "product.naziv" :price = "product.cena" :wayOfUse = "wayOfUse(product.nacinKoriscenja)" 
                         :image = "product.slika" :hover="hover" :forUser="forUser"/>
                     </v-hover>
                 </v-col>
@@ -55,6 +55,11 @@ export default {
             this.error=true;
             this.loading = false;
         });
+    },
+    methods:{
+        wayOfUse(number){
+            return Vue.prototype.$wayOfUse.find(x => x.number == number).desc;
+        }
     }
 }
 </script>

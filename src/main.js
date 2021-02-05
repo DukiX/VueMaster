@@ -23,6 +23,14 @@ Vue.prototype.$orders = "/order";
 Vue.prototype.$ordersForSeller = "/order/for-seller";
 Vue.prototype.$ordersForBuyer = "/order/for-buyer";
 
+Vue.prototype.$wayOfUse = [
+  { number:0, desc: 'Za ishranu'},
+  {number:1, desc: 'Za piće'},
+  {number:2, desc: 'Za konzerviranje voća'},
+  {number:3, desc: 'Za negu lica i tela'},
+  {number:4, desc: 'Za lećenje rana i povreda'}
+];
+
 export default () => {
 
 }

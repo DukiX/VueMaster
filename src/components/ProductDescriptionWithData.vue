@@ -31,7 +31,7 @@ export default {
             this.name = response.data.naziv;
             this.price = response.data.cena;
             this.description = response.data.opis;
-            this.wayOfUse = response.data.nacinKoriscenja;
+            this.wayOfUse = Vue.prototype.$wayOfUse.find(x => x.number == response.data.nacinKoriscenja).desc;
             this.seller = response.data.prodavac;
             if(response.data.slika!=null){
                 this.image = 'data:image/jpeg;base64,'+response.data.slika;

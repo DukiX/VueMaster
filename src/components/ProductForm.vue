@@ -29,7 +29,8 @@
                                 ></v-file-input> 
                             </v-col>
                              <v-col>
-                                <v-text-field v-model="wayOfUse" label="Način korišćenja" :rules="[rules.required]"/>
+                                <!-- <v-text-field v-model="wayOfUse" label="Način korišćenja" :rules="[rules.required]"/> -->
+                                <v-select v-model="wayOfUseNumber" :items="uses" item-text="desc" item-value="number"/>
                             </v-col>
                         </v-row>
                         <v-row>
@@ -86,7 +87,7 @@ export default {
                 this.name = response.data.naziv;
                 this.price = response.data.cena;
                 this.description = response.data.opis;
-                this.wayOfUse = response.data.nacinKoriscenja;
+                this.wayOfUseNumber = response.data.nacinKoriscenja;
                 this.seller = response.data.prodavac;
                 if(response.data.slika!=null){
                     this.stringImage = 'data:image/jpeg;base64,'+response.data.slika;
@@ -98,11 +99,12 @@ export default {
     },
     data(){
         return {
+            uses:Vue.prototype.$wayOfUse,
+            wayOfUseNumber: 0,
             seller: null,
             name : '',
             price : 0,
             description: '',
-            wayOfUse:'',
             image:undefined,
             stringImage:'',
             error:false,
@@ -119,6 +121,11 @@ export default {
                     return true;
                 }
             }
+        }
+    },
+    computed:{
+        wayOfUse(){
+            return Vue.prototype.$wayOfUse.find(x => x.number == this.wayOfUseNumber).desc;
         }
     },
     methods:{
@@ -161,7 +168,7 @@ export default {
                 Naziv:this.name,
                 Cena:this.price,
                 Opis:this.description,
-                NacinKoriscenja:this.wayOfUse
+                NacinKoriscenja:this.wayOfUseNumber
             },cfg).then((res)=>{
                 this.error=false;
                 this.loading = false;
@@ -210,7 +217,7 @@ export default {
                 Naziv:this.name,
                 Cena:this.price,
                 Opis:this.description,
-                NacinKoriscenja:this.wayOfUse
+                NacinKoriscenja:this.wayOfUseNumber
             },cfg).then((res)=>{
                 this.error=false;
                 this.loading = false;
