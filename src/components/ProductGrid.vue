@@ -10,7 +10,7 @@
                 </v-col>
             </v-row>
             
-            <v-row>
+            <v-row style="margin-left:6vw; margin-right:1vw;">
                 <v-col v-for="i in 12" :key="i" lg="4" md="6" sm="12">
                     <v-skeleton-loader type="card" loading v-if="loading">
                     </v-skeleton-loader>

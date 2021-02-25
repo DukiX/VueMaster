@@ -7,9 +7,11 @@
             </v-btn>
         </v-snackbar>
         <h2 class="display-2 mb-4">Detalji narudžbine</h2>
+        <br>
         <div>
             <div style="width:70vw">
                 <h2>Artikli:</h2>
+                <br>
                 <v-divider></v-divider>
                 <v-list v-if="order.listaElemenata.length!=0" two-line>
                     <template v-for="(product, index) in order.listaElemenata">
@@ -47,6 +49,7 @@
         </div>
         <div v-if="isBuyer" style="width:70vw; display: block; margin-left: auto; margin-right: auto;">
             <h2>Detalji o kupcu:</h2>
+            <br>
             <v-divider></v-divider>
             <br>
             <v-row no-gutters>
@@ -84,6 +87,7 @@
         </div>
         <div v-if="!isBuyer" style="width:70vw; display: block; margin-left: auto; margin-right: auto;">
             <h2>Detalji o prodavcu:</h2>
+            <br>
             <v-divider></v-divider>
             <br>
             <v-row no-gutters>
@@ -119,11 +123,15 @@
                 </v-col>
             </v-row>
         </div>
+        <v-divider></v-divider>
+        <br>
         <div style="width:70vw; ">
             <h2>Status narudžbine: {{(order.statusNarudzbine == 0)? "Nova":(order.statusNarudzbine == 1)?"Odbijena":"Odobrena"}}</h2>
             <h2>Datum narudžbine: {{formatDate(order.datumNarudzbine)}}</h2>
             <h2 v-if="order.statusNarudzbine == 2">Vreme isporuke narudžbine: {{order.vremeIsporukeUDanima}} dana</h2>
             <h2 v-if="order.statusNarudzbine == 2">Datum odobrenja narudžbine: {{formatDate(order.datumOdobrenjaNarudzbine)}}</h2>
+            <br>
+            <v-divider v-if="isBuyer"></v-divider>
             <br>
             <div v-if="isBuyer">
                 <div style="position:relative;">

@@ -1,7 +1,7 @@
 <template>
     <v-container style="height: 100vh; max-height: 100%;">
         <v-row justify="center" align="center">
-            <Order id="acc"/>
+            <Order id="order"/>
         </v-row>
     </v-container>
 </template>
@@ -20,8 +20,8 @@ export default {
 </script>
 
 <style>
-#acc{
+#order{
   padding-top: 100px;
-  padding-bottom: 50px;
+  padding-bottom: 70px;
 }
 </style>

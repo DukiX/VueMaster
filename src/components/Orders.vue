@@ -1,6 +1,8 @@
 <template>
-    <v-container>
+    <v-container style="width: 70vw">
         <h2 class="display-2 mb-4">Moje narudzbine</h2>
+
+        <br>
 
         <v-data-table
             style="cursor: pointer"
