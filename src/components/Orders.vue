@@ -14,6 +14,9 @@
             <template v-slot:item.datumNarudzbine="{ item }">
                 {{ formatDate(item.datumNarudzbine) }}
             </template>
+            <template v-slot:item.datumOdobrenjaNarudzbine="{ item }">
+                {{ formatDate(item.datumOdobrenjaNarudzbine) }}
+            </template>
         </v-data-table>
 
         <v-container v-if="orders.length==0">
@@ -59,8 +62,9 @@ export default {
             text: 'Status narudzbine',
             value: 'stausNarudzbineString'
           },
-          { text: 'Vreme isporuke u danima:', value: 'vremeIsporukeUDanima'},
-          { text: 'Datum narudzbine:', value: 'datumNarudzbine' }
+          { text: 'Datum narudzbine:', value: 'datumNarudzbine' },
+          { text: 'Datum odobrenja narudzbine:', value: 'datumOdobrenjaNarudzbine' },
+          { text: 'Vreme isporuke u danima:', value: 'vremeIsporukeUDanima'}
         ]
       }
     },
@@ -110,7 +114,8 @@ export default {
           return items;
         },
         formatDate(value) {
-            return moment(value).format("MMMM DD YYYY")
+            if(value == '/')return value;
+            return moment(value).format("DD-MM-YYYY");
         },
         getPrettyDate(d){
             var date = new Date(d);
@@ -127,6 +132,7 @@ export default {
                 e.datumNarudzbinePretty = this.getPrettyDate(e.datumNarudzbine);
                 e.stausNarudzbineString = e.statusNarudzbine == 0 ? 'Nova' : (e.statusNarudzbine == 1) ? 'Odbijena':'Odobrena';
                 if(e.vremeIsporukeUDanima == null) e.vremeIsporukeUDanima = "/";
+                if(e.datumOdobrenjaNarudzbine == null) e.datumOdobrenjaNarudzbine = "/";
             });
             this.error = false;
         }).catch(()=>{

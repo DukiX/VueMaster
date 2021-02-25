@@ -1,5 +1,11 @@
 <template>
     <div >
+        <v-snackbar v-model="error">
+            <span>{{errorMessage}}</span>
+            <v-btn color="red" text @click="error = false" >
+                Zatvori
+            </v-btn>
+        </v-snackbar>
         <v-container id="cont">
             <v-card>
                 <v-toolbar color = "primary">
@@ -109,7 +115,7 @@ export default {
             stringImage:'',
             error:false,
             loading:false,
-            errorMessage:'Error',
+            errorMessage:'Greška pri čuvanju proizvoda.',
             previewProduct:false,
             id : '',
             rules: {
@@ -193,7 +199,7 @@ export default {
                     }).catch((error)=>{
                         this.error=true;
                         this.loading = false;
-                        this.errorMessage = error.response.data.Message;
+                        this.errorMessage = error.response.data.Message ?? this.errorMessage;
                         this.$router.push('/product/'+res.data.id);
                     });
                 }
@@ -203,7 +209,7 @@ export default {
             }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
-                this.errorMessage = error.response.data.Message;
+                this.errorMessage = error.response.data.Message ?? this.errorMessage;
             });
         },
         updateProduct(e){
@@ -242,7 +248,7 @@ export default {
                     }).catch((error)=>{
                         this.error=true;
                         this.loading = false;
-                        this.errorMessage = error.response.data.Message;
+                        this.errorMessage = error.response.data.Message ?? this.errorMessage;
                         this.$router.push('/product/'+res.data.id);
                     });
                 }else{
@@ -251,7 +257,7 @@ export default {
             }).catch((error)=>{
                 this.error=true;
                 this.loading = false;
-                this.errorMessage = error.response.data.Message;
+                this.errorMessage  = error.response.data.Message ?? this.errorMessage;
             });
         }
     }

@@ -93,7 +93,8 @@ const routes = [
     name: 'Basket',
     component: BasketView,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      forBuyerOnly: true
     }
   },
   {
@@ -122,6 +123,16 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.forSellerOnly)) {
     if (store.getters['auth/getUserRole']=="PRODAVAC") {
+      next()
+      return
+    }
+    next('/')
+  } else {
+    next()
+  }
+
+  if(to.matched.some(record => record.meta.forBuyerOnly)) {
+    if (store.getters['auth/getUserRole']=="KUPAC") {
       next()
       return
     }

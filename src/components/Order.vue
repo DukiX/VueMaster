@@ -121,7 +121,9 @@
         </div>
         <div style="width:70vw; ">
             <h2>Status narudžbine: {{(order.statusNarudzbine == 0)? "Nova":(order.statusNarudzbine == 1)?"Odbijena":"Odobrena"}}</h2>
+            <h2>Datum narudžbine: {{formatDate(order.datumNarudzbine)}}</h2>
             <h2 v-if="order.statusNarudzbine == 2">Vreme isporuke narudžbine: {{order.vremeIsporukeUDanima}} dana</h2>
+            <h2 v-if="order.statusNarudzbine == 2">Datum odobrenja narudžbine: {{formatDate(order.datumOdobrenjaNarudzbine)}}</h2>
             <br>
             <div v-if="isBuyer">
                 <div style="position:relative;">
@@ -215,6 +217,7 @@
 import axios from 'axios';
 import Vue from 'vue';
 import store from '../store/index';
+import moment from 'moment';
 
 export default {
   name: 'Order',
@@ -251,6 +254,9 @@ export default {
       });
   },
   methods: {
+      formatDate(value) {
+            return moment(value).format("DD-MM-YYYY")
+        },
       approve(){
         var id = this.$route.params.id;
         axios.put(Vue.prototype.$orders+"/"+id,{

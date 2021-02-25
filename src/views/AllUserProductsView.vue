@@ -33,7 +33,7 @@ export default {
   padding-bottom: 50px;
 }
 #naslov{
-  margin-left:10px; 
+  margin-left:130px; 
   margin-top:80px; 
   margin-bottom:-50px;
   font-size: 35px;

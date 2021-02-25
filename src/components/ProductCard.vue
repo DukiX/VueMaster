@@ -6,12 +6,12 @@
                 Zatvori
             </v-btn>
         </v-snackbar>
-        <v-card v-on:click="goToProduct" :elevation="hover ? 12 : 4" min-width="320" max-width="320" > 
+        <v-card v-on:click="goToProduct" :elevation="hover ? 12 : 4" min-height="390" min-width="320" max-width="320" > 
             <v-img id="image" :aspect-ratio="12/9" min-width="320" max-width="320" :src="realOrDefaultImage" />
 
             <v-card-title style = "font-size: 22px;">{{name}}</v-card-title>
             <br style=" display: block; content: ''; margin: -20px 0;"/>
-            <v-card-subtitle>
+            <v-card-subtitle style="height:100px">
                 <span style = "font-size: 18px;">Cena : </span>
                 <span style = "font-weight: bold; font-size: 18px;">{{price}}</span> RSD   <br>
                 <span style = "font-size: 18px;"> Način korišćenja : {{wayOfUse}}</span> 

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-container id="cont">
-            <v-row  v-if="!loading">
-                <v-col v-for="product in productList" :key="product.id" lg="4">
+        <v-container id="cont" >
+            <v-row  v-if="!loading" style="margin-left:6vw; margin-right:1vw;">
+                <v-col v-for="product in productList" :key="product.id" xl = "3" lg="4">
                     <v-hover v-slot="{ hover }">
                         <ProductCard :id="product.id" :name = "product.naziv" :price = "product.cena" :wayOfUse = "wayOfUse(product.nacinKoriscenja)" 
                         :image = "product.slika" :hover="hover" :forUser="forUser"/>

@@ -4,7 +4,7 @@
           <v-row justify="center" align="center">
             <!-- <v-col>
             </v-col> -->
-            <v-col>
+            <v-col >
               <v-row>
                 <h2 id = "naslov">Proizvodi</h2>
               </v-row>
@@ -35,7 +35,7 @@ export default {
   padding-bottom: 50px;
 }
 #naslov{
-  margin-left:10px; 
+  margin-left:130px; 
   margin-top:80px; 
   margin-bottom:-50px;
   font-size: 35px;
