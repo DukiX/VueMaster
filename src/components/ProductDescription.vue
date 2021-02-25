@@ -86,6 +86,9 @@ export default {
         }),
         addToBasket(e){
             e.preventDefault();
+            if(!store.getters['auth/isLoggedIn']){
+                this.$router.push('/login');
+            }
             this.addItemToBasket({
                 id : v4(),
                 itemId : this.$route.params.id,
