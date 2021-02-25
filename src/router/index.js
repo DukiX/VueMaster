@@ -139,7 +139,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
-
   if(to.matched.some(record => record.meta.requiresLoggedOut)) {
     if (!store.getters['auth/isLoggedIn']) {
       next()

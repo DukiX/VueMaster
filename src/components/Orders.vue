@@ -57,9 +57,9 @@ export default {
           },
           {
             text: 'Status narudzbine',
-            value: 'stausNarudzbineString',
+            value: 'stausNarudzbineString'
           },
-          { text: 'Vreme isporuke u danima:', value: 'vremeIsporukeUDanima' },
+          { text: 'Vreme isporuke u danima:', value: 'vremeIsporukeUDanima'},
           { text: 'Datum narudzbine:', value: 'datumNarudzbine' }
         ]
       }
@@ -77,17 +77,28 @@ export default {
                         return (date1 > date2) ? -1 : 1;
                     }
                 }
-                // else if (!(isNaN(a[index[0]]))) {
-                //     console.log("aaa");
-                //     if (isDescending[0]) {
-                //         return (a[index] - b[index]);
-                //     } else {
-                //         return (b[index] - a[index]);
-                //     }
-
-                // }
+                else if (index == 'vremeIsporukeUDanima') {
+                    if (isDescending[0]) {
+                        if(a[index]=='/')
+                            return 1;
+                        else if(a[index] < b[index]) return 1;
+                        else return -1;
+                    } else {
+                        if(b[index]=='/')
+                            return 1;
+                        else if(b[index] < a[index]) return 1;
+                        else return -1;
+                    }
+                }
                 else {
-                    //index je kompleksan pa ne radi ima . npr prodavac.lastName
+                    var spl = (index[0]+'').split('.');
+                    if(spl.length==2){
+                        if (isDescending[0]) {
+                            return a[spl[0]][spl[1]] < b[spl[0]][spl[1]] ? -1 : 1;
+                        } else {
+                            return b[spl[0]][spl[1]]< a[spl[0]][spl[1]] ? -1 : 1;
+                        }
+                    }
                     if (isDescending[0]) {
                         return a[index] < b[index] ? -1 : 1;
                     } else {
