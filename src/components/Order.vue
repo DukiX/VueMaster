@@ -138,7 +138,7 @@
                     <div style="position:absolute; left:0px;">
                         <v-dialog v-model="dialog2" width="500">
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-btn :disabled="!approved" v-bind="attrs" v-on="on" elevation="5" type="button" style="float: right;">Odbij narudžbinu</v-btn>
+                                    <v-btn :disabled="rejected" v-bind="attrs" v-on="on" elevation="5" type="button" style="float: right;">Odbij narudžbinu</v-btn>
                                 </template>
                                 <v-card>
                                     <v-card-title>
@@ -241,6 +241,9 @@ export default {
     computed: {
         approved(){
             return this.order.statusNarudzbine == 2;
+        },
+        rejected(){
+            return this.order.statusNarudzbine == 1;
         },
         isBuyer: function () {
             return store.getters['auth/getUserRole']=="PRODAVAC";

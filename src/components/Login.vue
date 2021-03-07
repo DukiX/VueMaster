@@ -81,7 +81,8 @@ export default {
     methods: {
         ...mapActions({ 
             signIn:'auth/signIn',
-            saveUserImage:'auth/saveUserImage'
+            saveUserImage:'auth/saveUserImage',
+            saveUserData:'auth/saveUserData',
         }),
          sendLogin(e){
             e.preventDefault();
@@ -98,6 +99,10 @@ export default {
                     this.image = 'data:image/jpeg;base64,'+imageResponse.data;
 
                     this.saveUserImage(this.image);
+                });
+
+                axios.get(Vue.prototype.$user).then((response)=>{
+                    this.saveUserData(response.data);
                 });
 
                 this.$router.push('/');
