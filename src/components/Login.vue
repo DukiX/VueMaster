@@ -28,7 +28,7 @@
                     :type= "showPassword ? 'text': 'password'" label="Lozinka" name ="password"
                     @click:append="showPassword=!showPassword"/>
                     <div class="text-center">
-                        <v-btn :disabled="loading" color="primary" block type="submit">Uloguj se</v-btn>
+                        <v-btn :disabled="loading || !filled" color="primary" block type="submit">Uloguj se</v-btn>
                     </div>
                 </form>
             </v-card-text>
@@ -77,6 +77,11 @@ export default {
                 }
             }
         } 
+    },
+    computed:{
+        filled(){
+            return this.username != null &&this.password !=null && this.username != '' && this.password != '';
+        }
     },
     methods: {
         ...mapActions({ 
