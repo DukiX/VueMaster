@@ -1,7 +1,7 @@
 <template>
     <v-container fill-height style="height: 100vh; max-height: 100%;">
         <v-row justify="center" align="center">
-                <Login id = "logn"/>
+                <Login id = "login"/>
         </v-row>
     </v-container>
 </template>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style>
-#logn{
+#login{
   padding-top: 70px;
   padding-bottom: 50px;
 }

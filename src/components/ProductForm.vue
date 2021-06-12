@@ -20,7 +20,7 @@
                                <v-text-field v-model="name" label="Naziv proizvoda" :rules="[rules.required]"/>
                             </v-col>
                             <v-col>
-                               <v-text-field min="0" max = "100000" single-line v-model="price" type="number" label="Cena proizvoda (RSD)" :rules="[rules.required]" />
+                               <v-text-field min="0" max = "100000" v-model="price" type="number" label="Cena proizvoda (RSD)" :rules="[rules.required]" />
                             </v-col>
                         </v-row>
                         <v-row>
@@ -36,7 +36,7 @@
                             </v-col>
                              <v-col>
                                 <!-- <v-text-field v-model="wayOfUse" label="Način korišćenja" :rules="[rules.required]"/> -->
-                                <v-select v-model="wayOfUseNumber" :items="uses" item-text="desc" item-value="number"/>
+                                <v-select v-model="wayOfUseNumber" :items="uses" item-text="desc" label= "Način korišćenja" item-value="number"/>
                             </v-col>
                         </v-row>
                         <v-row>

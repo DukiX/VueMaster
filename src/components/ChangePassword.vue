@@ -37,7 +37,7 @@
                     @click:append="showConfirmPassword=!showConfirmPassword"/>
 
                     <div class="text-center">
-                        <v-btn :disabled="loading" color="primary" block type="submit">Promeni lozinku</v-btn>
+                        <v-btn :disabled="loading || !filled" color="primary" block type="submit">Promeni lozinku</v-btn>
                     </div>
                 </form>
             </v-card-text>
@@ -80,6 +80,13 @@ export default {
                 }
             }
         } 
+    },
+    computed:{
+        filled(){
+            return this.oldPassword != null && this.newPassword != null && this.confirmPassword != null 
+            && this.oldPassword != '' && this.newPassword != '' && this.confirmPassword != ''
+            && this.newPassword===this.confirmPassword;
+        }
     },
     methods: {
         ...mapActions({ 

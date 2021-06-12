@@ -51,7 +51,7 @@
               </v-list-item>
               <v-list-item v-if="loggedIn" v-on:click="$router.push('/orders').catch(err => {$router.go()})">
                 <v-list-item-content>
-                  <v-list-item-title v-if="loggedIn">Moje narudzbine</v-list-item-title>
+                  <v-list-item-title v-if="loggedIn">Moje narudžbine</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>

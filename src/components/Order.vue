@@ -186,7 +186,7 @@
                                     <v-card-text>
                                         <v-row>
                                         <v-col cols="10" style="padding-top:35px; font-size:16px">
-                                            Unesi Vreme u danima za kolko će stići narudžbina:
+                                            Unesite Vreme u danima za koliko će stići narudžbina:
                                         </v-col>
                                         <v-col cols="2">
                                             <v-text-field min="1" max="100" hide-details single-line v-model="numberOfDays" type="number"/>

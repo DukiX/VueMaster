@@ -43,7 +43,7 @@
                     <hr/>
 
                     <div class="text-center">
-                        <v-btn :disabled="loading" color="primary" block type="submit">Registruj se</v-btn>
+                        <v-btn :disabled="loading || !filled" color="primary" block type="submit">Registruj se</v-btn>
                     </div>
                 </form>
             </v-card-text>
@@ -79,7 +79,7 @@ export default {
             rules: {
                 required: value => {
                     if(!value)
-                        return "Required";
+                        return "Zahtevano polje.";
                     return true;
                 },
                 passwordMatch: () => {
@@ -88,9 +88,18 @@ export default {
                         return true;
                     }
                     this.validPassword = false;
-                    return `The Confirm password does not match the password.`;
+                    return `Ponovljena lozinka se ne poklapa sa lozinkom.`;
                 }
             }
+        }
+    },
+    computed:{
+        filled(){
+            return this.email != null && this.username != null && this.password != null &&
+            this.confirmPassword != null &&this.firstName !=null && this.lastName != null
+            && this.email != '' && this.username != '' && this.password != '' &&
+            this.confirmPassword != '' &&this.firstName !='' && this.lastName != '' 
+            && this.password===this.confirmPassword;
         }
     },
     methods: {

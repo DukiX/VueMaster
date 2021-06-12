@@ -1,6 +1,6 @@
 <template>
     <v-container style="width: 70vw">
-        <h2 class="display-2 mb-4">Moje narudzbine</h2>
+        <h2 class="display-2 mb-4">Moje narudžbine</h2>
 
         <br>
 
